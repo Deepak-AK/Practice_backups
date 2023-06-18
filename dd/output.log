@@ -1,0 +1,53 @@
+2023-06-18 06:43:50,444 p=3490 u=student n=ansible | PLAY [Setup editing environment] ****************************************************************************************
+2023-06-18 06:43:50,486 p=3490 u=student n=ansible | TASK [Check if user is logged in via GUI] *******************************************************************************
+2023-06-18 06:43:50,954 p=3490 u=student n=ansible | ok: [localhost]
+2023-06-18 06:43:50,973 p=3490 u=student n=ansible | TASK [Terminate playbook if user is not logged in via GUI] **************************************************************
+2023-06-18 06:43:51,000 p=3490 u=student n=ansible | ok: [localhost] => {
+    "changed": false,
+    "msg": "All assertions passed"
+}
+2023-06-18 06:43:51,003 p=3490 u=student n=ansible | TASK [Determine course type] ********************************************************************************************
+2023-06-18 06:43:51,346 p=3490 u=student n=ansible | ok: [localhost]
+2023-06-18 06:43:51,349 p=3490 u=student n=ansible | TASK [Ensure needed python packages are installed] **********************************************************************
+2023-06-18 06:43:56,055 p=3490 u=student n=ansible | changed: [localhost]
+2023-06-18 06:43:56,058 p=3490 u=student n=ansible | TASK [Ensure needed directories are present] ****************************************************************************
+2023-06-18 06:43:56,411 p=3490 u=student n=ansible | changed: [localhost] => (item=~/.vim/autoload)
+2023-06-18 06:43:56,608 p=3490 u=student n=ansible | changed: [localhost] => (item=~/.vim/bundle)
+2023-06-18 06:43:56,821 p=3490 u=student n=ansible | changed: [localhost] => (item=~/.config/yamllint)
+2023-06-18 06:43:57,024 p=3490 u=student n=ansible | changed: [localhost] => (item=~/bin)
+2023-06-18 06:43:57,028 p=3490 u=student n=ansible | TASK [Ensure pathogen is downloaded] ************************************************************************************
+2023-06-18 06:44:02,349 p=3490 u=student n=ansible | changed: [localhost]
+2023-06-18 06:44:02,352 p=3490 u=student n=ansible | TASK [Ensure plugin repos are cloned] ***********************************************************************************
+2023-06-18 06:44:06,149 p=3490 u=student n=ansible | changed: [localhost] => (item=https://github.com/Yggdroot/indentLine.git)
+2023-06-18 06:44:08,950 p=3490 u=student n=ansible | changed: [localhost] => (item=https://github.com/pedrohdz/vim-yaml-folds.git)
+2023-06-18 06:44:14,495 p=3490 u=student n=ansible | changed: [localhost] => (item=https://github.com/dense-analysis/ale.git)
+2023-06-18 06:44:14,510 p=3490 u=student n=ansible | TASK [Render terminal profile template] *********************************************************************************
+2023-06-18 06:44:15,323 p=3490 u=student n=ansible | changed: [localhost]
+2023-06-18 06:44:15,327 p=3490 u=student n=ansible | TASK [Ensure config files are copied] ***********************************************************************************
+2023-06-18 06:44:15,778 p=3490 u=student n=ansible | changed: [localhost] => (item={'key': 'vim', 'value': {'file': 'vimrc', 'dest': '~/.vimrc'}})
+2023-06-18 06:44:16,167 p=3490 u=student n=ansible | changed: [localhost] => (item={'key': 'nano', 'value': {'file': 'nanorc', 'dest': '~/.nanorc'}})
+2023-06-18 06:44:16,553 p=3490 u=student n=ansible | changed: [localhost] => (item={'key': 'yamllint', 'value': {'file': 'config', 'dest': '~/.config/yamllint/config'}})
+2023-06-18 06:44:16,935 p=3490 u=student n=ansible | changed: [localhost] => (item={'key': 'tmux', 'value': {'file': 'tmux.conf', 'dest': '~/.tmux.conf'}})
+2023-06-18 06:44:17,403 p=3490 u=student n=ansible | changed: [localhost] => (item={'key': 'monitor', 'value': {'file': 'monitors.xml', 'dest': '~/.config/monitors.xml'}})
+2023-06-18 06:44:17,784 p=3490 u=student n=ansible | changed: [localhost] => (item={'key': 'terminal', 'value': {'file': 'org.gnome.Terminal.desktop', 'dest': '~/.local/share/applications/org.gnome.Terminal.desktop'}})
+2023-06-18 06:44:18,191 p=3490 u=student n=ansible | changed: [localhost] => (item={'key': 'ansible-navigator', 'value': {'file': 'ansible-navigator.yml', 'dest': '~/.ansible-navigator.yml'}})
+2023-06-18 06:44:18,196 p=3490 u=student n=ansible | TASK [Ensure other file types are copied] *******************************************************************************
+2023-06-18 06:44:18,608 p=3490 u=student n=ansible | changed: [localhost] => (item={'key': 'upload_timings', 'value': {'file': 'upload_timings', 'dest': '~/bin/upload_timings', 'permissions': '0755'}})
+2023-06-18 06:44:19,173 p=3490 u=student n=ansible | changed: [localhost] => (item={'key': 'feature', 'value': {'file': 'placeholder', 'dest': '/var/tmp'}})
+2023-06-18 06:44:19,178 p=3490 u=student n=ansible | TASK [Ensure ~/.bashrc is configured] ***********************************************************************************
+2023-06-18 06:44:19,524 p=3490 u=student n=ansible | changed: [localhost]
+2023-06-18 06:44:19,527 p=3490 u=student n=ansible | TASK [Ensure lab timings cronjob is enabled] ****************************************************************************
+2023-06-18 06:44:19,961 p=3490 u=student n=ansible | changed: [localhost]
+2023-06-18 06:44:19,965 p=3490 u=student n=ansible | TASK [Remove ~/.ansible-navigator.yml] **********************************************************************************
+2023-06-18 06:44:20,192 p=3490 u=student n=ansible | changed: [localhost]
+2023-06-18 06:44:20,196 p=3490 u=student n=ansible | TASK [Ensure resolution is obtained] ************************************************************************************
+2023-06-18 06:44:20,419 p=3490 u=student n=ansible | ok: [localhost]
+2023-06-18 06:44:20,422 p=3490 u=student n=ansible | TASK [Ensure resolution is set] *****************************************************************************************
+2023-06-18 06:44:20,677 p=3490 u=student n=ansible | changed: [localhost]
+2023-06-18 06:44:20,682 p=3490 u=student n=ansible | TASK [Ensure firefox base directory exists] *****************************************************************************
+2023-06-18 06:44:20,935 p=3490 u=student n=ansible | changed: [localhost]
+2023-06-18 06:44:20,948 p=3490 u=student n=ansible | TASK [Ensure Firefox profile is restored] *******************************************************************************
+2023-06-18 06:44:22,015 p=3490 u=student n=ansible | changed: [localhost]
+2023-06-18 06:44:22,019 p=3490 u=student n=ansible | RUNNING HANDLER [Ensure profile is loaded] ******************************************************************************
+2023-06-18 06:44:22,292 p=3490 u=student n=ansible | changed: [localhost]
+2023-06-18 06:44:22,292 p=3490 u=student n=ansible | RUNNING HANDLER [Ensure terminal terminates] ****************************************************************************
