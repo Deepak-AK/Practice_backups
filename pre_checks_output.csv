@@ -1,0 +1,30 @@
+Command,Output
+df -hT,"Filesystem     Type      Size  Used Avail Use% Mounted on
+devtmpfs       devtmpfs  437M     0  437M   0% /dev
+tmpfs          tmpfs     481M     0  481M   0% /dev/shm
+tmpfs          tmpfs     193M  5.4M  187M   3% /run
+/dev/vda4      xfs       9.4G  1.7G  7.7G  19% /
+/dev/vda3      xfs       495M  160M  335M  33% /boot
+/dev/vda2      vfat      200M  7.0M  193M   4% /boot/efi
+tmpfs          tmpfs      97M     0   97M   0% /run/user/1001"
+ifconfig,"eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 172.25.250.12  netmask 255.255.255.0  broadcast 172.25.250.255
+        inet6 fe80::6257:262d:2ebf:5224  prefixlen 64  scopeid 0x20<link>
+        ether 52:54:00:00:fa:0c  txqueuelen 1000  (Ethernet)
+        RX packets 3031  bytes 3315469 (3.1 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 1957  bytes 222883 (217.6 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 6  bytes 416 (416.0 B)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 6  bytes 416 (416.0 B)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0"
+route,"Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+default         bastion.lab.exa 0.0.0.0         UG    100    0        0 eth0
+172.25.250.0    0.0.0.0         255.255.255.0   U     100    0        0 eth0"

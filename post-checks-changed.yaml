@@ -1,0 +1,22 @@
+- name: Run post-checks
+  hosts: web
+  gather_facts: false
+
+  tasks:
+        - name: Retrieve command outputs
+          command: "{{ item }}"
+          register: command_output
+          with_items:
+            - "df -hT"  
+            - "ifconfig"
+            - "route"
+
+        - name: Generate CSV file      
+          template:
+              src: pre_checks_output.j2
+              dest: differences_output.csv
+          vars:
+             command_output: "{{ command_output.results }}"
+
+
+

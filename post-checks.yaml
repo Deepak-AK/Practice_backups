@@ -1,0 +1,22 @@
+- name: Run post-checks
+  hosts: web
+  gather_facts: false
+
+  tasks:
+        - name: Retrieve command outputs
+          shell: "{{ item }}"
+          register: command_output
+          loop:
+            - "df -hT"  
+            - "ifconfig"
+            - "route"
+
+        - name: Generate CSV file      
+          local_action:
+            module: copy
+            content: |
+              Command,Pre-Check Output,Post-Check Output
+              df -hT,"{{ lookup('file', 'pre_checks_output.csv').splitlines()[1].split(',')[1] }}","{{ command_output.results[0].stdout }}"
+              ifconfig,"{{ lookup('file', 'pre_checks_output.csv').splitlines()[2].split(',')[1] }}","{{ command_output.results[1].stdout }}"
+              route,"{{ lookup('file', 'pre_checks_output.csv').splitlines()[3].split(',')[1] }}","{{ command_output.results[2].stdout }}"
+            dest: "differences_output.csv"

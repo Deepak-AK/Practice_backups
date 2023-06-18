@@ -1,0 +1,25 @@
+---
+- name: Run pre-checks
+  hosts: web 
+  gather_facts: false
+
+
+  tasks:
+
+    - name: Retrieve command outputs
+      command: "{{ item }}"
+      register: command_output
+      with_items:
+        - "df -hT"
+        - "ifconfig"
+        - "route"
+    - name: Generate CSV file
+      local_action:
+        module: template
+          
+        content: |
+          Command,Output
+            df -hT,"{{ command_output.results[0].stdout }}"
+            route,"{{ command_output.results[2].stdout }}"
+          dest: "pre_checks_output.csv"
+      no_log: false
