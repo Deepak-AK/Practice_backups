@@ -1,0 +1,14 @@
+---
+- name: Ensure required iSCSI packages are present
+  hosts: iscsi_portal
+  gather_facts: no
+  collections:
+    - community.general
+  tasks:
+
+    - name: Ensure required iSCSI software packages are present
+      yum:
+        name:
+          - firewalld
+          - targetcli
+        state: present
