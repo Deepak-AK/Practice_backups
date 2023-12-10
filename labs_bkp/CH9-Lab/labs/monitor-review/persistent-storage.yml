@@ -1,0 +1,10 @@
+# From the "Configuring Persistent Storage" section
+# in the "Cluster Monitoring" chapter of the
+# Red Hat OpenShift Container Platform 4.10 Monitoring Guide
+<component>:
+  volumeClaimTemplate:
+    spec:
+      storageClassName: <STORAGE-CLASS-NAME>
+      resources:
+        requests:
+          storage: <SIZE>

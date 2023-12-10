@@ -1,0 +1,22 @@
+
+oc get configmap classroom-certs -n openshift-config -o jsonpath='{.data.*}' | openssl x509 -in - -subject -noout
+
+oc new-project certificates-app-trust
+
+oc new-app --name hello1 --image registry.ocp4.example.com:8443/redhattraining/hello-world-nginx:v1.0
+
+oc create route edge --service hello1 --hostname hello1-trust.apps.ocp4.example.com
+
+oc new-app --name hello2 --image registry.ocp4.example.com:8443/redhattraining/hello-world-nginx:v1.0
+
+oc create route edge --service hello2 --hostname hello2-trust.apps.ocp4.example.com
+
+oc exec -it deployment/hello1 -- /bin/bash
+
+oc create configmap ca-certs
+
+oc label configmap ca-certs config.openshift.io/inject-trusted-cabundle=true
+
+oc set volume deployment/hello1 -t configmap --name trusted-ca --add --read-only=true --mount-path /etc/pki/ca-trust/extracted/pem --configmap-name ca-certs
+
+openssl x509 -in /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem -subject -noout

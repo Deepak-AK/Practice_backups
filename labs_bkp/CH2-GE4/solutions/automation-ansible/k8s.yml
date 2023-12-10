@@ -1,0 +1,83 @@
+---
+- name: Logging in to OpenShift
+  hosts: localhost
+  become: false
+  gather_facts: false
+
+  tasks:
+    - name: Ensure an access token is retrieved for the developer user
+      redhat.openshift.openshift_auth:
+        host: https://api.ocp4.example.com:6443
+        username: developer
+        password: developer
+        ca_cert: /etc/pki/tls/certs/ca-bundle.crt
+      register: auth_results
+
+- name: Deploying the Hello World application
+  hosts: localhost
+  become: false
+  gather_facts: false
+  vars:
+    project: automation-ansible
+  module_defaults:
+    group/redhat.openshift.openshift:
+      namespace: "{{ project }}"
+      api_key: "{{ auth_results['openshift_auth']['api_key'] }}"
+      host: https://api.ocp4.example.com:6443
+      ca_cert: /etc/pki/tls/certs/ca-bundle.crt
+    group/kubernetes.core.k8s:
+      namespace: "{{ project }}"
+      api_key: "{{ auth_results['openshift_auth']['api_key'] }}"
+      host: https://api.ocp4.example.com:6443
+      ca_cert: /etc/pki/tls/certs/ca-bundle.crt
+
+  tasks:
+    - name: Ensure the project exists
+      redhat.openshift.k8s:
+        state: present
+        resource_definition:
+          apiVersion: project.openshift.io/v1
+          kind: Project
+          metadata:
+            name: "{{ project }}"
+
+    - name: Ensure the Hello World application is deployed
+      redhat.openshift.k8s:
+        state: present
+        src: hello.yml
+
+    - name: Ensure information about Pods is retrieved
+      kubernetes.core.k8s_info:
+        kind: Pod
+        label_selectors:
+          - app = hello
+      register: pod_list
+
+    - name: Ensure the list of pods is displayed
+      debug:
+        var: pod_list
+
+    - name: Ensure the deployments is scaled up
+      kubernetes.core.k8s_scale:
+        kind: Deployment
+        name: hello
+        replicas: 3
+
+    - name: Ensure a route exists
+      redhat.openshift.openshift_route:
+        service: hello-svc
+      register: route
+
+    - name: Ensure the application responds
+      uri:
+        url: "http://{{ route['result']['spec']['host'] }}"
+        return_content: true
+      register: response
+      until: response['status'] == 200
+      retries: 10
+      delay: 5
+
+    - name: Ensure the application data are displayed
+      debug:
+        var: response['content']
+...
