@@ -1,0 +1,585 @@
+
+
+#################### Wed Nov 29 04:01:38 EST 2023 ####################
+
+
+Checking prerequisites for Guided Exercise: Draining Nodes for Maintenance
+
+ Verify the OpenShift cluster is running:
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! · Waiting for the cluster to start (be patient)............... !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+
+
+#################### Wed Nov 29 04:35:28 EST 2023 ####################
+
+
+Completing Guided Exercise: Draining Nodes for Maintenance
+
+Error from server (NotFound): namespaces "pools-maintenance" not found
+
+Please use start if you wish to do the exercise again.
+
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Connection to utility closed by remote host.
+
+
+#################### Wed Nov 29 07:44:36 EST 2023 ####################
+
+
+Checking prerequisites for Guided Exercise: Draining Nodes for Maintenance
+
+ Verify the OpenShift cluster is running:
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! · Waiting for the cluster to start (be patient)............... !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+!!!!!!!!!!!!!!!!!!!!!!!!!!!! SUCCESS !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! · Router pods are available................................... !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!! SUCCESS !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! · OAuth pods are available.................................... !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!! SUCCESS !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! · API pods are available...................................... !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!! SUCCESS !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! · Control plane node 'master01' is ready...................... !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!! SUCCESS !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! · Control plane node 'master02' is ready...................... !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!! SUCCESS !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! · Control plane node 'master03' is ready...................... !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!! SUCCESS !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+ Checking for conflicts with existing OpenShift projects:
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! · The 'pools-maintenance' project is absent................... !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Error from server (NotFound): namespaces "pools-maintenance" not found
+!!!!!!!!!!!!!!!!!!!!!!!!!!!! SUCCESS !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+Setting up the classroom for Guided Exercise: Draining Nodes for Maintenance
+
+
+ Preparing the student's cluster:
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! · Download exercise files..................................... !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!! SUCCESS !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! · Modifying /etc/ansible/ansible.cfg.......................... !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!! SUCCESS !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! · Creating project pools-maintenance and sample deployment.... !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!! SUCCESS !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!Overall start status........................................... !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!! SUCCESS !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+
+#################### Wed Nov 29 08:29:19 EST 2023 ####################
+
+
+Completing Guided Exercise: Draining Nodes for Maintenance
+
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! · Delete OpenShift project 'pools-maintenance'................ !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!! SUCCESS !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! · Wait for project 'pools-maintenance' to be gone............. !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Error from server (NotFound): namespaces "pools-maintenance" not found
+!!!!!!!!!!!!!!!!!!!!!!!!!!!! SUCCESS !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! · Remove exercise files....................................... !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!! SUCCESS !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+Please use start if you wish to do the exercise again.
+
+
+
+#################### Wed Nov 29 08:30:50 EST 2023 ####################
+
+
+Checking prerequisites for Guided Exercise: Draining Nodes for Maintenance
+
+ Verify the OpenShift cluster is running:
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! · Waiting for the cluster to start (be patient)............... !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!! SUCCESS !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! · Router pods are available................................... !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!! SUCCESS !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! · OAuth pods are available.................................... !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!! SUCCESS !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! · API pods are available...................................... !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!! SUCCESS !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! · Control plane node 'master01' is ready...................... !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!! SUCCESS !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! · Control plane node 'master02' is ready...................... !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!! SUCCESS !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! · Control plane node 'master03' is ready...................... !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!! SUCCESS !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+ Checking for conflicts with existing OpenShift projects:
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! · The 'pools-maintenance' project is absent................... !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Error from server (NotFound): namespaces "pools-maintenance" not found
+!!!!!!!!!!!!!!!!!!!!!!!!!!!! SUCCESS !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+Setting up the classroom for Guided Exercise: Draining Nodes for Maintenance
+
+
+ Preparing the student's cluster:
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! · Download exercise files..................................... !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!! SUCCESS !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! · Modifying /etc/ansible/ansible.cfg.......................... !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!! SUCCESS !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! · Creating project pools-maintenance and sample deployment.... !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!! SUCCESS !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!Overall start status........................................... !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!! SUCCESS !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+
+#################### Wed Nov 29 08:37:06 EST 2023 ####################
+
+
+Completing Guided Exercise: Draining Nodes for Maintenance
+
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! · Delete OpenShift project 'pools-maintenance'................ !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!! SUCCESS !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! · Wait for project 'pools-maintenance' to be gone............. !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Error from server (NotFound): namespaces "pools-maintenance" not found
+!!!!!!!!!!!!!!!!!!!!!!!!!!!! SUCCESS !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! · Remove exercise files....................................... !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!! SUCCESS !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+Please use start if you wish to do the exercise again.
+
+
+
+#################### Sun Dec 10 04:04:39 EST 2023 ####################
+
+
+Checking prerequisites for Guided Exercise: Draining Nodes for Maintenance
+
+ Verify the OpenShift cluster is running:
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! · Waiting for the cluster to start (be patient)............... !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
+Unable to connect to the server: x509: certificate signed by unknown authority
