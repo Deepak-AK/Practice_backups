@@ -1,0 +1,84 @@
+#!/bin/bash
+#
+# Copyright 2020, 2022 Red Hat, Inc.
+#
+# NAME
+#     lab-certificates-app-trust - lab script for DO380-OCP4
+#
+# SYNOPSIS
+#     lab-certificates-app-trust {start|finish}
+#
+#        start  - prepare the system for starting the lab
+#        finish - perform post-lab finish
+#
+# DESCRIPTION
+#     This script, based on singular argument, either does start or finish for:
+#     Guided Exercise: Configuring Applications to Trust the Enterprise
+#     Certificate Authority
+#
+# CHANGELOG
+#   * Fri Sep  9 2022 Herve Quatremain <hquatrem@redhat.com>
+#   - Simplifying the setup. Students use the existing classroom CA.
+#   * Thu Aug 27 Michael Phillips <miphilli@redhat.com>
+#   - reorganized the use of ocp4_login_as_admin and oc ${SYSTEM_ADMIN}
+#   - added a step to lab_finish to wait until co/kube-apiserver starts progressing
+#   * Wed Aug 26 Michael Phillips <miphilli@redhat.com>
+#   - added the ability to run oc commands as: oc ${SYSTEM_ADMIN}
+#   * Wed Jul 01 Michael Phillips <miphilli@redhat.com>
+#   - updated the DESCRIPTION
+#   * Fri Jun 26 Michael Phillips <miphilli@redhat.com>
+#   - updated for shared Ansible infrastructure
+#   * Fri May 29 Michael Phillips <miphilli@redhat.com>
+#   - original code
+
+PATH=/usr/bin:/bin:/usr/sbin:/sbin:/root/bin:/usr/local/bin
+declare -a valid_commands=(start finish)
+
+# Change these variables to match your exercise
+this='certificates-app-trust'
+title='Guided Exercise: Configuring Applications to Trust the Enterprise Certificate Authority'
+
+# Do not change these variables
+target='workstation'
+run_as_root='true'
+
+source /etc/rht
+
+function lab_start {
+
+  ocp4_print_prereq_header
+
+  ocp4_is_cluster_up
+  ocp4_login_as_admin
+  print_line
+
+  ocp4_fail_and_exit_if_project_exists "${this}"
+
+  ocp4_print_setup_header
+
+  print_line " Preparing the student's cluster:"
+  ocp4_grab_lab_files "no-solution"
+
+
+  ocp4_print_setup_footer
+}
+
+function lab_finish {
+  ocp4_print_cleanup_header
+  ocp4_login_as_admin
+
+  ocp4_delete_project "${this}"
+
+  ocp4_cleanup_lab_files
+
+  ocp4_print_cleanup_footer
+}
+
+
+############### Don't EVER change anything below this line ###############
+
+# Source library of functions
+source /usr/local/lib/${function_lib}
+source /usr/local/lib/${platform_lib}
+
+grading_main_program "$@"

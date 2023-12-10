@@ -1,0 +1,95 @@
+#!/bin/bash
+#
+# Copyright 2020, 2022 Red Hat, Inc.
+#
+# NAME
+#     lab-pools-creating - lab script for DO380-OCP4
+#
+# SYNOPSIS
+#     lab-pools-creating {start|finish}
+#
+#        start  - prepare the system for starting the lab
+#        finish - perform post-lab finish
+#
+# DESCRIPTION
+#     This script, based on singular argument, either does start or finish for
+#     the Guided Exercise: Creating Custom Machine Config Pools.
+#
+# CHANGELOG
+#   * Fri Sep 30 2022 Herve Quatremain <hquatrem@redhat.com>
+#   - Cleaning up resources in lab_finish() (Jira DO380-168)
+#   * Fri Aug 28 Alejandro Coma <acomabon@redhat.com>
+#   - added readiness check for nodes 4-6
+#   * Wed Jul 29 Michael Phillips <miphilli@redhat.com>
+#   - added the ocp4_login_as_admin function after the ocp4_is_cluster_up function
+#   * Tue Jun 24 Joel Birchler <jbirchler@redhat.com>
+#   - Initial add
+
+#########################################################################
+
+PATH=/usr/bin:/bin:/usr/sbin:/sbin:/root/bin:/usr/local/bin
+declare -a valid_commands=(start finish)
+
+# Change these variables to match your exercise
+this='pools-creating'
+title='Guided Exercise: Creating Custom Machine Config Pools'
+
+playbook_dir="/usr/local/lib/ansible"
+
+# Do not change these variables
+target='workstation'
+run_as_root='true'
+
+
+function lab_start {
+  ocp4_print_prereq_header
+  ocp4_is_cluster_up
+  print_line
+
+  ocp4_print_setup_header
+  print_line
+  print_line " Preparing the student's cluster:"
+  ocp4_grab_lab_files
+  ocp4_print_setup_footer
+}
+
+
+function lab_finish {
+  ocp4_print_cleanup_header
+  ocp4_login_as_admin
+  deploy_ansible
+
+  pad2 "Reconfiguring larges nodes as worker nodes"
+  ansible-playbook ${playbook_dir}/infra/unset_role.yml &
+  local pid="$!"
+  spinner "${pid}"
+  if wait "${pid}"
+  then
+    print_SUCCESS
+  else
+    print_FAIL
+  fi
+
+  pad2 "Removing the MachineConfigPool resource (be patient)"
+  ansible-playbook ${playbook_dir}/${this}/delete_mcp.yml &
+  pid="$!"
+  spinner "${pid}"
+  if wait "${pid}"
+  then
+    print_SUCCESS
+  else
+    print_FAIL
+  fi
+
+  ocp4_cleanup_lab_files
+  ocp4_print_cleanup_footer
+}
+
+
+############### Don't EVER change anything below this line ###############
+
+# Source library of functions
+source /usr/local/lib/${function_lib}
+source /usr/local/lib/${platform_lib}
+
+grading_main_program "$@"

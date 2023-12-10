@@ -1,0 +1,180 @@
+#!/bin/bash
+#
+# Copyright 2022 Red Hat, Inc.
+#
+# NAME
+#     lab-storage-automations - lab script for DO380-OCP4
+#
+# SYNOPSIS
+#     lab-storage-automations {start|finish}
+#
+#        start  - prepare the system for starting the lab
+#        finish - perform post-lab finish
+#
+# DESCRIPTION
+#     This script, based on singular argument, either does start or finish for
+#     the storage-automations
+#
+# CHANGELOG
+#   * Sep 12 Andres Hernandez <andres.hernandez@redhat.com>
+#   - original code
+
+PATH=/usr/bin:/bin:/usr/sbin:/sbin:/root/bin:/usr/local/bin
+declare -a valid_commands=(start grade finish)
+
+# Change these variables to match your exercise
+this='storage-automations'
+title='Guided Exercise: storage automations'
+playbook_dir="/usr/local/lib/ansible"
+
+# Do not change these variables
+target='workstation'
+run_as_root='true'
+
+source /etc/rht
+
+RESOURCES_FILE=/home/student/DO380/labs/storage-automations/resources.yaml
+
+function check_environment {
+  printf "\n%s\n\n" "Listing required python packages"
+  pip3 list --format=legacy | egrep -i 'kubernetes|jmespath'
+
+  printf "\n%s\n\n" "Checking PackageManifest, CatalogSource"
+  for TYPE
+  in packagemanifest catalogsource
+  do
+    oc get ${TYPE} -n openshift-marketplace || true
+  done
+
+  printf "\n%s\n\n" "Checking Project, Namespace"
+  for TYPE
+  in project namespace
+  do
+    oc get ${TYPE} openshift-local-storage || true
+  done
+
+  printf "\n%s\n\n" "Checking OperatorGroup, Subscription, ClusterServiceVersion"
+  for TYPE
+  in operatorgroup subscription clusterserviceversion
+  do
+    oc get ${TYPE} -n openshift-local-storage || true
+  done
+
+  printf "\n%s\n\n" "Checking StorageClasses, LocalVolumeDiscovery, LocalVolumeDiscoveryResult, LocalVolumeSet LocalVolume"
+  for TYPE
+  in storageclasses localvolumediscovery localvolumediscoveryresult localvolumeset localvolume
+  do
+    oc get ${TYPE} -A || true
+  done
+}
+
+function lab_start {
+  ocp4_print_prereq_header
+
+  ocp4_is_cluster_up
+  ocp4_login_as_admin
+  print_line
+  ocp4_fail_and_exit_if_project_exists "${this}"
+
+  ocp4_print_setup_header
+
+  print_line
+  print_line " Preparing the student's cluster:"
+
+  deploy_ansible
+
+  ocp4_grab_lab_files
+
+  check_environment 1>&2 || true
+
+  pad2 "Installing the Local Storage Operator using Ansible"
+  playbook=${playbook_dir}/common/install-lso.yaml
+
+  if ansible-playbook ${playbook}
+  then
+    print_SUCCESS
+  else
+    print_FAIL
+  fi
+
+  check_environment 1>&2 || true
+
+  pad2 "Creating test resources"
+  if oc apply -f ${RESOURCES_FILE}
+  then
+    print_SUCCESS
+  else
+    print_FAIL
+  fi
+
+  pad2 "Wait until the PVC is bound"
+  TRIES=6
+  X=1
+  while sleep 10
+  do
+    if [ "${X}" -le "${TRIES}" ]
+    then
+      PVC_STATUS="$(oc get pvc test-fs -o jsonpath='{.status.phase}')"
+      if [ "${PVC_STATUS}" = "Bound" ]
+      then
+        print_SUCCESS
+        break
+      fi
+      X=$((${X}+1))
+    else
+      print_FAIL
+      break
+    fi
+  done
+
+  pad2 "Wait until the pod is running"
+  if oc get pods -l app=test -o name | xargs -r -t -n 1 oc wait --for=condition=Ready --timeout=60s
+  then
+    print_SUCCESS
+  else
+    print_FAIL
+  fi
+
+  oc get pvc -l app=test
+  oc get all -l app=test
+
+  ocp4_print_setup_footer
+}
+
+function lab_finish {
+  ocp4_print_cleanup_header
+  ocp4_login_as_admin
+
+  check_environment 1>&2 || true
+
+  pad2 "Delete test deployment and PVC"
+  if oc delete -f ${RESOURCES_FILE}
+  then
+    print_SUCCESS
+  else
+    print_FAIL
+  fi
+
+  pad2 "Deleting the Local Storage Operator using Ansible"
+  playbook=${playbook_dir}/common/delete-lso.yaml
+
+  if ansible-playbook ${playbook}
+  then
+    print_SUCCESS
+  else
+    print_FAIL
+  fi
+
+  check_environment 1>&2 || true
+
+  ocp4_cleanup_lab_files
+  ocp4_print_cleanup_footer
+}
+
+############### Don't EVER change anything below this line ###############
+
+# Source library of functions
+source /usr/local/lib/${function_lib}
+source /usr/local/lib/${platform_lib}
+
+grading_main_program "$@"

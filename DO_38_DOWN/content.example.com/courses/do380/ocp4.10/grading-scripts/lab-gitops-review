@@ -1,0 +1,432 @@
+#!/bin/bash
+#
+# Copyright 2020, 2022 Red Hat, Inc.
+#
+# NAME
+#     lab-gitops-review - lab script for DO380-OCP4
+#
+# SYNOPSIS
+#     lab-gitops-review {start|grade|finish}
+#
+#        start  - prepare the system for starting the lab
+#        grade  - perform evaluation steps on the system
+#        finish - perform post-lab finish
+#
+# DESCRIPTION
+#     This script, based on singular argument, either does start, grade, or
+#     finish for "Implementing GitOps with Jenkins"
+#
+# CHANGELOG
+#   * Fri Sep  2 2022 Herve Quatremain <hquatrem@redhat.com>
+#   - Create, populate, and delete GitLab project
+#   * Mon Aug 10 Fernando Lozano <flozano@redhat.com>
+#   - initial code
+
+#########################################################################
+
+PATH=/usr/bin:/bin:/usr/sbin:/sbin:/root/bin:/usr/local/bin
+declare -a valid_commands=(start grade finish)
+
+# Change these variables to match your exercise
+this='gitops-review'
+title='Lab: Implementing GitOps with Jenkins'
+playbook_dir="/usr/local/lib/ansible"
+
+# Do not change these variables
+target='workstation'
+run_as_root='true'
+
+
+function lab_start {
+
+  ocp4_print_prereq_header
+
+  ocp4_is_cluster_up
+  ocp4_login_as_admin
+  print_line
+
+  ocp4_fail_and_exit_if_project_exists "${this}"
+
+  ocp4_print_setup_header
+
+  print_line
+  print_line " Preparing the student's cluster:"
+  ocp4_restore_oauth
+  do380_samples_co_defaults
+  ocp4_grab_lab_files
+  deploy_ansible
+
+  pad2 "Creating the ${this} Git repository"
+  ansible-playbook ${playbook_dir}/${this}/gitlab_create.yml &
+  local pid=$!
+  spinner ${pid} 2
+  if wait ${pid}
+  then
+    print_SUCCESS
+  else
+    print_FAIL
+  fi
+
+  pad2 "Patching the Jenkins persistent template"
+  TMP_FILE=$(mktemp --suffix .yml)
+  oc get template jenkins-persistent -n openshift -o yaml > "${TMP_FILE}"
+  if grep -qF /etc/pki/tls/certs "${TMP_FILE}"
+  then
+    print_SUCCESS
+  else
+    sed -i -e 's:/etc/pki/ca-trust/source/anchors:/etc/pki/tls/certs:' "${TMP_FILE}"
+    if oc apply -f "${TMP_FILE}"
+    then
+      print_SUCCESS
+    else
+      print_FAIL
+    fi
+  fi
+
+  rm -f "${TMP_FILE}"
+
+  pad2 "Creating the ${this} project"
+  if oc new-project ${this}
+  then
+    print_SUCCESS
+  else
+    print_FAIL
+  fi
+
+  ocp4_print_setup_footer
+}
+
+
+function lab_finish {
+  ocp4_print_cleanup_header
+  ocp4_login_as_admin
+
+  pad2 "Revoking permissions from the jenkins account"
+  oc adm policy remove-cluster-role-from-user self-provisioner -z jenkins -n ${this}
+  oc adm policy remove-cluster-role-from-user cluster-admin -z jenkins -n ${this}
+  print_SUCCESS
+
+  ocp4_delete_project "${this}"
+  ocp4_restore_oauth
+  do380_samples_co_defaults
+
+  deploy_ansible
+
+  pad2 "Deleting the Git repository and exercise files"
+  ansible-playbook ${playbook_dir}/${this}/gitlab_delete.yml &
+  local pid=$!
+  spinner ${pid} 2
+  if wait ${pid}
+  then
+    print_SUCCESS
+  else
+    print_FAIL
+  fi
+
+  ocp4_cleanup_lab_files
+  ocp4_print_cleanup_footer
+}
+
+
+function lab_grade {
+
+  ocp4_login_as_admin
+  ocp4_print_grade_header
+
+  print_line 'Verifying your Jenkins deployment:'
+
+  local host=""
+  local container=""
+  local TMPFILE=$(mktemp --suffix=.xml)
+  pad2 "Project '${this}' exists"
+  if oc project "${this}"
+  then
+    print_PASS
+
+    local app="jenkins"
+    pad2 "Deployment '${app}' is available"
+    if oc rollout status dc/"${app}" --timeout 1s
+    then
+      print_PASS
+    else
+      print_FAIL
+    fi
+
+    pad2 "Template 'jenkins-persistent' was used"
+    if oc get dc jenkins -o jsonpath='{.metadata.labels.template}' | grep -q jenkins-persistent
+    then
+      print_PASS
+    else
+      print_FAIL
+    fi
+
+    pad2 "PVC '${app}' exists"
+    if oc get pvc "${app}" -o name
+    then
+      print_PASS
+    else
+      print_FAIL
+    fi
+
+    pad2 "SA '${app}' is a cluster administrator"
+    if oc policy who-can get node | grep -q "system:serviceaccount:${this}:${app}"
+    then
+      print_PASS
+    else
+      print_FAIL
+    fi
+
+    pad2 "Route '${app}' exists"
+    if oc get route "${app}" -o name
+    then
+      print_PASS
+    else
+      print_FAIL
+    fi
+
+    host=$( oc get route "${app}" -o jsonpath='{.spec.host}' )
+    pad2 "Jenkins is available at '${host}'"
+    if curl -s "https://${host}/securityRealm/commenceLogin" | grep -q "Jenkins"
+    then
+      print_PASS
+    else
+      print_FAIL
+    fi
+
+    pad2 "Node.js agent GIT_SSL_CAINFO variable set"
+    container=$( oc get pods -o name | grep -v deploy | head -n 1 | cut -d/ -f2 )
+    if [ -n "${container}" ]
+    then
+      oc cp "${container}":/var/lib/jenkins/config.xml "${TMPFILE}"
+      if grep -q '<key>GIT_SSL_CAINFO</key>' "${TMPFILE}"
+      then
+        print_PASS
+
+        pad2 "GIT_SSL_CAINFO variable set to CA file"
+        if grep -q '<value>/var/run/secrets/kubernetes.io/serviceaccount/ca.crt</value>' "${TMPFILE}"
+        then
+          print_PASS
+        else
+          print_FAIL
+        fi
+      else
+        print_FAIL
+      fi
+    else
+      print_FAIL
+    fi
+  else
+    print_FAIL
+  fi
+
+  print_line
+  print_line 'Verifying your Kustomize settings:'
+
+  local gitclone="/home/student/${this}"
+  local kustom='kustomization.yaml'
+  pad2 "Folder '${gitclone}/samples' contains a '${kustom}' file"
+  if [ -r "${gitclone}/samples/${kustom}" ]
+  then
+    print_PASS
+
+    local resources=""
+    cd "${gitclone}"
+    pad2 "Kustomize processes the 'samples' folder"
+    if resources="$( oc kustomize samples )"
+    then
+      print_PASS
+    else
+      print_FAIL
+    fi
+
+    pad2 "Kustomize generates a Cluster Samples Operator configuration"
+    local api=$( echo "${resources}" | yq r - 'apiVersion' )
+    local kind=$( echo "${resources}" | yq r - 'kind' )
+    local name=$( echo "${resources}" | yq r - 'metadata.name' )
+    if [ "${api}" = 'samples.operator.openshift.io/v1' -a "${kind}" = 'Config' -a "${name}" = 'cluster' ]
+    then
+      print_PASS
+    else
+      print_FAIL
+    fi
+
+  else
+    print_FAIL
+  fi
+
+  print_line
+  print_line 'Verifying your Apply pipeline:'
+
+  local jenkinsfile='Jenkinsfile-apply'
+  cd "${gitclone}"
+  pad2 "File '${gitclone}/${jenkinsfile}' exists"
+  if [ -r "./${jenkinsfile}" ]
+  then
+    print_PASS
+
+    pad2 "There is no 'FIXME' marker in the Jenkinsfile"
+    if ! grep -q 'FIXME' "./${jenkinsfile}"
+    then
+      print_PASS
+    else
+      print_FAIL
+    fi
+
+  else
+    print_FAIL
+  fi
+
+  print_line
+  print_line 'Verifying your Git repository:'
+
+  local giturl=""
+  pad2 "Directory '${gitclone}' exists"
+  if [ -d "${gitclone}" ]
+  then
+    print_PASS
+
+    cd "${gitclone}"
+    pad2 "Directory '${gitclone}' is a Git repository"
+    if [ -d ".git" ]
+    then
+      print_PASS
+
+      giturl=$( git config --get remote.origin.url )
+      pad2 "Directory '${gitclone}' is a clone of the GitLab repository"
+      if echo "${giturl}" | grep -q 'git.ocp4.example.com:training/gitops-review'
+      then
+        print_PASS
+      else
+        print_FAIL
+      fi
+
+      pad2 "Repository contains file '${jenkinsfile}'"
+      if [ -r "${jenkinsfile}" ]
+      then
+        print_PASS
+      else
+        print_FAIL
+      fi
+
+      local folder='samples'
+      pad2 "Repository contains directory '${folder}'"
+      if [ -d "${folder}" ]
+      then
+        print_PASS
+      else
+        print_FAIL
+      fi
+
+      pad2 "All files in the repository are commited"
+      if [ -z "$( git status --porcelain )" ]
+      then
+        print_PASS
+      else
+        print_FAIL
+      fi
+
+      pad2 "All commits in the repository are pushed"
+      local log
+      if log=$( git log origin/main..HEAD ) && test -z "${log}"
+      then
+        print_PASS
+      else
+        print_FAIL
+      fi
+
+    else
+      print_FAIL
+    fi
+  else
+    print_FAIL
+  fi
+
+  print_line
+  print_line 'Firing your Apply pipeline:'
+
+  local file='/home/student/jenkins-api-token.txt'
+  local token=$( cat "${file}" )
+  pad2 "File '${file}' exist and is not empty"
+  if [ -r "${file}" -a -n "${token}" ]
+  then
+    print_PASS
+
+    local proj="https://${host}/job/apply/api/json"
+    local auth="--user admin-admin-edit-view:${token}"
+    local class=$( curl -sk "${proj}" ${auth} | jq -r '._class')
+    pad2 "Token can access the 'appy' project"
+    if [ -n "${class}" ]
+    then
+      print_PASS
+    else
+      print_FAIL
+    fi
+  else
+    print_FAIL
+  fi
+
+  if [ -n "${container}" ]
+  then
+    pad2 "The 'apply' project is a multibranch pipeline"
+    oc cp "${container}":/var/lib/jenkins/jobs/apply/config.xml "${TMPFILE}"
+    if grep -q 'org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject' "${TMPFILE}"
+    then
+      print_PASS
+    else
+      print_FAIL
+    fi
+
+    pad2 "The 'apply' project is using the GitLab repository"
+    if grep -qi 'git.ocp4.example.com/training/gitops-review' "${TMPFILE}"
+    then
+      print_PASS
+    else
+      print_FAIL
+    fi
+
+    pad2 "The 'apply' project is using the 'Jenkinsfile-apply' file"
+    if grep -q '<scriptPath>Jenkinsfile-apply</scriptPath>' "${TMPFILE}"
+    then
+      print_PASS
+    else
+      print_FAIL
+    fi
+  fi
+
+  rm -f "${TMPFILE}"
+  ocp4_print_grade_footer
+}
+
+
+function do380_samples_co_defaults {
+  skipped=$( oc get config.samples cluster -o jsonpath='{.spec.skippedTemplates[*]}' )
+  if [ -n "${skipped}" ]
+  then
+    pad2 "Restore default config of the Cluster Samples Operator"
+    if oc apply -k "${labs}/${this}/default"
+    then
+      sleep 20 &
+      local pid=$!
+      spinner ${pid} 2
+      print_SUCCESS
+    else
+      print_FAIL
+    fi
+  fi
+  pad2 "Restore templates for Ruby on Rails"
+  if oc get templates -n openshift -o name | grep rails
+  then
+    print_SUCCESS
+  else
+    print_FAIL
+  fi
+}
+
+
+############### Don't EVER change anything below this line ###############
+
+# Source library of functions
+source /usr/local/lib/${function_lib}
+source /usr/local/lib/${platform_lib}
+
+grading_main_program "$@"
