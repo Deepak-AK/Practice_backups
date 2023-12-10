@@ -1,0 +1,6 @@
+---
+# IMPORTANT: If you update those variables, please also update the variables
+# for the restore role (roles/restore/vars/mail.yml)
+backup_dir: /var/lib/backup
+backup_prefix: gls-backup-
+...

@@ -1,0 +1,27 @@
+---
+- name: Creating and populating the project in GitLab
+  hosts: localhost
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Ensure the project exists in GitLab
+      include_role:
+        name: gitlab_project_create
+      vars:
+        gitlab_project_create_project_name: "gitops-gitops"
+        gitlab_project_create_content: gitops-gitops
+
+    - name: Ensure the SSH key is stored in GitLab
+      community.general.gitlab_user:
+        api_url: https://git.ocp4.example.com
+        validate_certs: false
+        api_username: root
+        api_password: RedHatGitlab
+        username: developer
+        name: Developer User
+        email: dev@example.com
+        sshkey_name: developerKey
+        sshkey_file: "{{ lookup('ansible.builtin.file', '/home/student/.ssh/lab_rsa.pub') }}"
+        state: present
+...

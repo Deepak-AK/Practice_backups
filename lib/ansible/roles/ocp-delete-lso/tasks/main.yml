@@ -1,0 +1,274 @@
+# https://docs.openshift.com/container-platform/4.10/storage/persistent_storage/persistent-storage-local.html
+
+---
+# tasks file for ocp-delete-lso
+
+- name: LocalVolumes
+  block:
+
+  - name: Discover LocalVolumes
+    kubernetes.core.k8s_info:
+      api_version: local.storage.openshift.io/v1
+      kind: LocalVolume
+      namespace: "{{ operator['namespace'] }}"
+    register: localvolumes
+
+  - name: Set facts for existing LocalVolumes
+    set_fact:
+      cacheable: True
+      local_volumes: "{{ localvolumes | json_query('resources[*].metadata.name') }}"
+    when:
+    - localvolumes['resources'] | length > 0
+    - localvolumes['resources'][0]['metadata']['name'] is defined
+
+  - name: List local_volumes
+    debug:
+      var: local_volumes
+
+  - name: Remove LocalVolumes
+    kubernetes.core.k8s:
+      state: absent
+      api_version: local.storage.openshift.io/v1
+      kind: LocalVolume
+      name: "{{ item }}"
+      namespace: "{{ operator['namespace'] }}"
+    loop: "{{ local_volumes }}"
+
+- name: LocalVolumeDiscoveryResult
+  block:
+
+  - name: Discover LocalVolumeDiscoveryResult
+    kubernetes.core.k8s_info:
+      api_version: local.storage.openshift.io/v1alpha1
+      kind: LocalVolumeDiscoveryResult
+      namespace: "{{ operator['namespace'] }}"
+    register: localvolumediscoveryresults
+
+  - name: Set facts for existing LocalVolumeDiscoveryResult
+    set_fact:
+      cacheable: True
+      local_volume_discovery_results: "{{ localvolumediscoveryresults | json_query('resources[*].metadata.name') }}"
+    when:
+    - localvolumediscoveryresults['resources'] | length > 0
+    - localvolumediscoveryresults['resources'][0]['metadata']['name'] is defined
+
+  - name: List local_volume_discovery_results
+    debug:
+      var: local_volume_discovery_results
+
+  - name: Remove LocalVolumeDiscoveryResult
+    kubernetes.core.k8s:
+      state: absent
+      api_version: local.storage.openshift.io/v1alpha1
+      kind: LocalVolumeDiscoveryResult
+      name: "{{ item }}"
+      namespace: "{{ operator['namespace'] }}"
+    loop: "{{ local_volume_discovery_results }}"
+
+- name: LocalVolumeDiscoveries
+  block:
+
+  - name: Discover LocalVolumeDiscoveries
+    kubernetes.core.k8s_info:
+      api_version: local.storage.openshift.io/v1alpha1
+      kind: LocalVolumeDiscovery
+      name: auto-discover-devices
+      namespace: "{{ operator['namespace'] }}"
+    register: localvolumediscoveries
+
+  - name: Set facts for existing LocalVolumeDiscoveries
+    set_fact:
+      cacheable: True
+      local_volume_discoveries: "{{ localvolumediscoveries | json_query('resources[*].metadata.name') }}"
+    when:
+    - localvolumediscoveries['resources'] | length > 0
+    - localvolumediscoveries['resources'][0]['metadata']['name'] is defined
+
+  - name: List local_volume_discoveries
+    debug:
+      var: local_volume_discoveries
+
+  - name: Remove LocalVolumeDiscoveries
+    kubernetes.core.k8s:
+      state: absent
+      api_version: local.storage.openshift.io/v1alpha1
+      kind: LocalVolumeDiscovery
+      name: "{{ item }}"
+      namespace: "{{ operator['namespace'] }}"
+    loop: "{{ local_volume_discoveries }}"
+
+- name: PersistentVolumes
+  block:
+
+  - name: Discover PersistentVolumes
+    kubernetes.core.k8s_info:
+      api_version: v1
+      kind: PersistentVolume
+    register: persistentvolumes
+
+  - name: Set facts for existing PersistentVolumes
+    set_fact:
+      cacheable: True
+      persistent_volumes: "{{ persistentvolumes | json_query('resources[?spec.storageClassName==`local-blk`].metadata.name') }}"
+    when:
+    - persistentvolumes['resources'] | length > 0
+    - persistentvolumes['resources'][0]['metadata']['name'] is defined
+    - persistentvolumes['resources'][0]['spec']['storageClassName'] is defined
+
+  - name: List persistent_volumes
+    debug:
+      var: persistent_volumes
+
+  - name: Remove PersistentVolumes
+    kubernetes.core.k8s:
+      state: absent
+      api_version: v1
+      kind: PersistentVolume
+      name: "{{ item }}"
+    loop: "{{ persistent_volumes }}"
+
+- name: Namespace / Project
+  block:
+
+  - name: Remove Namespace
+    kubernetes.core.k8s:
+      state: absent
+      api_version: v1
+      kind: Namespace
+      name: "{{ operator['namespace'] }}"
+
+  - name: Remove Project
+    kubernetes.core.k8s:
+      state: absent
+      api_version: project.openshift.io/v1
+      kind: Project
+      name: "{{ operator['namespace'] }}"
+
+- name: ClusterServiceVersion
+  block:
+
+  - name: Discover ClusterServiceVersions
+    kubernetes.core.k8s_info:
+      api_version: operators.coreos.com/v1alpha1
+      kind: ClusterServiceVersion
+      namespace: "{{ operator['namespace'] }}"
+    register: clusterserviceversions
+
+  - name: Set facts for existing ClusterServiceVersions
+    set_fact:
+      cacheable: True
+      cluster_service_versions: "{{ clusterserviceversions | json_query('resources[*].metadata.name') }}"
+    when:
+    - clusterserviceversions['resources'] | length > 0
+    - clusterserviceversions['resources'][0]['metadata']['name'] is defined
+
+  - name: List cluster_service_versions
+    debug:
+      var: cluster_service_versions
+
+  - name: Remove ClusterServiceVersion
+    kubernetes.core.k8s:
+      state: absent
+      api_version: operators.coreos.com/v1alpha1
+      kind: ClusterServiceVersion
+      name: "{{ item }}"
+      namespace: "{{ operator['namespace'] }}"
+    loop: "{{ cluster_service_versions }}"
+
+- name: Subscription
+  block:
+
+  - name: Discover Subscriptions
+    kubernetes.core.k8s_info:
+      api_version: operators.coreos.com/v1alpha1
+      kind: Subscription
+      namespace: "{{ operator['namespace'] }}"
+    register: subscriptions
+
+  - name: Set facts for existing Subscriptions
+    set_fact:
+      cacheable: True
+      subscriptions: "{{ subscriptions | json_query('resources[*].metadata.name') }}"
+    when:
+    - subscriptions['resources'] | length > 0
+    - subscriptions['resources'][0]['metadata']['name'] is defined
+
+  - name: List subscriptions
+    debug:
+      var: subscriptions
+
+  - name: Remove Subscription
+    kubernetes.core.k8s:
+      state: absent
+      api_version: operators.coreos.com/v1alpha1
+      kind: Subscription
+      name: "{{ item }}"
+      namespace: "{{ operator['namespace'] }}"
+    loop: "{{ subscriptions }}"
+
+- name: OperatorGroup
+  block:
+
+  - name: Discover OperatorGroups
+    kubernetes.core.k8s_info:
+      api_version: operators.coreos.com/v1
+      kind: OperatorGroup
+      namespace: "{{ operator['namespace'] }}"
+    register: operatorgroups
+
+  - name: Set facts for existing OperatorGroups
+    set_fact:
+      cacheable: True
+      operator_groups: "{{ operatorgroups | json_query('resources[*].metadata.name') }}"
+    when:
+    - operatorgroups['resources'] | length > 0
+    - operatorgroups['resources'][0]['metadata']['name'] is defined
+
+  - name: List operator_groups
+    debug:
+      var: operator_groups
+
+  - name: Remove OperatorGroup
+    kubernetes.core.k8s:
+      state: absent
+      api_version: operators.coreos.com/v1
+      kind: OperatorGroup
+      name: "{{ item }}"
+      namespace: "{{ operator['namespace'] }}"
+    loop: "{{ operator_groups }}"
+
+- name: PackageManifest
+  block:
+
+  - name: Discover PackageManifests
+    kubernetes.core.k8s_info:
+      api_version: packages.operators.coreos.com/v1
+      kind: PackageManifest
+      namespace: "{{ marketplace_namespace }}"
+    register: packagemanifests
+
+  - name: Set facts for existing PackageManifests
+    set_fact:
+      cacheable: True
+      package_manifests: "{{ packagemanifests | json_query('resources[?status.packageName==`local-storage-operator`].metadata.name') }}"
+    when:
+    - packagemanifests['resources'] | length > 0
+    - packagemanifests['resources'][0]['metadata']['name'] is defined
+    - packagemanifests['resources'][0]['status']['packageName'] is defined
+
+  - name: List package_manifests
+    debug:
+      var: package_manifests
+
+# 405 MethodNotAllowed
+# PackageManifest local-storage-operator
+# Failure: The server does not allow this method on the requested resource
+#  - name: Remove PackageManifest
+#    kubernetes.core.k8s:
+#      state: absent
+#      api_version: packages.operators.coreos.com/v1
+#      kind: PackageManifest
+#      # name: "{{ operator['package_manifest'] }}"
+#      name: "{{ item }}"
+#      namespace: openshift-marketplace
+#    loop: "{{ package_manifests }}"

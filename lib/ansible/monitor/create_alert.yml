@@ -1,0 +1,12 @@
+- name: Create Test Alert
+  hosts: localhost
+  module_defaults:
+    group/k8s:
+      ca_cert: "/etc/pki/tls/certs/ca-bundle.crt"
+  tasks:
+    - name: Create objects from the manifest
+      k8s:
+        state: "{{ k8s_state | default('present') }}"
+        src: "{{ playbook_dir + '/' + item }}"
+      loop:
+        - test-alert-defn.yml

@@ -1,0 +1,38 @@
+# https://github.com/ansible/ansible-modules-extras/issues/2384#issuecomment-241534464
+
+---
+- name: Manage YUM repositories
+  hosts: utility
+  become: yes
+  remote_user: lab
+  collections:
+    - community.general
+  module_defaults:
+    community.general.ini_file:
+      no_extra_spaces: true
+  vars:
+    yum_repos_state:
+    - { enabled: 1 , file: "epel" ,                 name: "epel" }
+    - { enabled: 0 , file: "epel" ,                 name: "epel-debuginfo" }
+    - { enabled: 0 , file: "epel" ,                 name: "epel-source" }
+    - { enabled: 1 , file: "epel-modular" ,         name: "epel-modular" }
+    - { enabled: 0 , file: "epel-modular" ,         name: "epel-modular-debuginfo" }
+    - { enabled: 0 , file: "epel-modular" ,         name: "epel-modular-source" }
+    - { enabled: 0 , file: "epel-testing" ,         name: "epel-testing" }
+    - { enabled: 0 , file: "epel-testing" ,         name: "epel-testing-debuginfo" }
+    - { enabled: 0 , file: "epel-testing" ,         name: "epel-testing-source" }
+    - { enabled: 0 , file: "epel-testing-modular" , name: "epel-testing-modular" }
+    - { enabled: 0 , file: "epel-testing-modular" , name: "epel-testing-modular-debuginfo" }
+    - { enabled: 0 , file: "epel-testing-modular" , name: "epel-testing-modular-source" }
+
+  tasks:
+
+  - name: Restore YUM repositories
+    community.general.ini_file:
+      dest: "/etc/yum.repos.d/{{ item.file }}.repo"
+      section: "{{ item.name }}"
+      option: enabled
+      value: "{{ item.enabled }}"
+    loop: "{{ yum_repos_state }}"
+    loop_control:
+      label: "{{ item.name }}"

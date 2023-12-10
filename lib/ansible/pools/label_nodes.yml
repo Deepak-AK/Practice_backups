@@ -1,0 +1,29 @@
+---
+- name: Label worker nodes as infra nodes
+  hosts: localhost
+  collections:
+  - kubernetes.core
+  module_defaults:
+    group/kubernetes.core.k8s:
+      ca_cert: "/etc/pki/tls/certs/ca-bundle.crt"
+    group/k8s:
+      ca_cert: "/etc/pki/tls/certs/ca-bundle.crt"
+  tasks:
+    - name: Login to OpenShift cluster
+      shell:
+        cmd: oc login -u admin -p redhat https://api.ocp4.example.com:6443
+    - name: Label nodes
+      vars:
+        nodes:
+          - worker04
+          - worker05
+          - worker06
+        labels:
+          - "node-role.kubernetes.io/infra: ''"
+          - "node-role.kubernetes.io/worker: null"
+      kubernetes.core.k8s:
+        state: present
+        definition: "{{ lookup('template', 'templates/node.j2') }}"
+      loop: "{{ nodes }}"
+      loop_control:
+        label: Changing labels for node {{ item }}.

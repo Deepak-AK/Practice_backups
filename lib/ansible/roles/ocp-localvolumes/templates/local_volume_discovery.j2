@@ -1,0 +1,15 @@
+apiVersion: local.storage.openshift.io/v1alpha1
+kind: LocalVolumeDiscovery
+metadata:
+  name: {{ hostvars['utility']['local_volume_discovery']['name'] | default("auto-discover-devices") }}
+  namespace: {{ hostvars['utility']['volume_set_namespace'] | default(local_volume['namespace']) }}
+spec:
+  nodeSelector:
+    nodeSelectorTerms:
+    - matchExpressions:
+      - key: kubernetes.io/hostname
+        operator: In
+        values:
+{% for node in local_volume['nodes'] %}
+        - {{ node }}
+{% endfor %}

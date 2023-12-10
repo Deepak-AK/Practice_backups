@@ -1,0 +1,16 @@
+---
+- name: Remove the developer/versioned-hello repository
+  hosts: localhost
+  become: false
+  gather_facts: false
+
+  tasks:
+    - name: Ensure repository developer/versioned-hello does not exist
+      herve4m.quay.quay_repository:
+        name: versioned-hello
+        state: absent
+        quay_host: https://registry.ocp4.example.com:8443
+        quay_username: developer
+        quay_password: developer
+        validate_certs: false
+...

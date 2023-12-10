@@ -1,0 +1,149 @@
+ancestor: null
+releases:
+  0.0.1:
+    changes:
+      release_summary: Initial public release.
+    fragments:
+    - v0.0.1_summary.yml
+    modules:
+    - description: Manage Red Hat Quay organizations
+      name: quay_application
+      namespace: ''
+    - description: Manage Red Hat Quay default repository permissions
+      name: quay_default_perm
+      namespace: ''
+    - description: Gather information about images in a Red Hat Quay repository
+      name: quay_image_info
+      namespace: ''
+    - description: Manage Red Hat Quay global messages
+      name: quay_message
+      namespace: ''
+    - description: Manage Red Hat Quay repository notifications
+      name: quay_notification
+      namespace: ''
+    - description: Manage Red Hat Quay organizations
+      name: quay_organization
+      namespace: ''
+    - description: Manage Red Hat Quay repositories
+      name: quay_repository
+      namespace: ''
+    - description: Manage Red Hat Quay robot accounts
+      name: quay_robot
+      namespace: ''
+    - description: Gather information about tags in a Red Hat Quay repository
+      name: quay_tag_info
+      namespace: ''
+    - description: Manage Red Hat Quay teams
+      name: quay_team
+      namespace: ''
+    - description: Manage Red Hat Quay users
+      name: quay_user
+      namespace: ''
+    release_date: '2021-10-03'
+  0.0.10:
+    modules:
+    - description: Manage Red Hat Quay image manifest labels
+      name: quay_manifest_label
+      namespace: ''
+    - description: Gather information about manifest labels in Red Hat Quay
+      name: quay_manifest_label_info
+      namespace: ''
+    release_date: '2022-01-27'
+  0.0.11:
+    modules:
+    - description: Manage tokens for accessing Red Hat Quay repositories
+      name: quay_docker_token
+      namespace: ''
+    release_date: '2022-02-19'
+  0.0.12:
+    modules:
+    - description: Create OAuth access tokens for accessing the Red Hat Quay API
+      name: quay_api_token
+      namespace: ''
+    release_date: '2022-02-21'
+  0.0.13:
+    fragments:
+    - v0.0.13_summary.yml
+    objects:
+      role:
+      - description: Create and configure a Red Hat Quay organization
+        name: quay_org
+        namespace: null
+    release_date: '2022-02-27'
+  0.0.14:
+    changes:
+      release_summary: Collection tested against Red Hat Quay v3.7.0
+    fragments:
+    - v0.0.14_summary.yml
+    release_date: '2022-05-30'
+  0.0.2:
+    changes:
+      release_summary: Fix wrong project URLs
+    fragments:
+    - v0.0.2_summary.yml
+    release_date: '2021-10-03'
+  0.0.3:
+    changes:
+      release_summary: New quay_vulnerability_info information module
+    fragments:
+    - v0.0.3_summary.yml
+    release_date: '2021-10-07'
+  0.0.4:
+    changes:
+      release_summary: New quay_repository_mirror module
+    fragments:
+    - v0.0.4_summary.yml
+    release_date: '2021-12-03'
+  0.0.5:
+    changes:
+      release_summary: Collection tested against Red Hat Quay v3.6.1
+    fragments:
+    - v0.0.5_summary.yml
+    release_date: '2021-12-04'
+  0.0.6:
+    changes:
+      minor_changes:
+      - quay_notification - add the ``vulnerability_level`` parameter.
+    fragments:
+    - v0.0.6_summary.yml
+    release_date: '2021-12-06'
+  0.0.7:
+    changes:
+      release_summary: New quay_first_user module
+    fragments:
+    - v0.0.7_summary.yml
+    modules:
+    - description: Create the first user account
+      name: quay_first_user
+      namespace: ''
+    release_date: '2021-12-22'
+  0.0.8:
+    changes:
+      bugfixes:
+      - quay_notification - add a check to verify that the repository exists.
+      minor_changes:
+      - Tests - add integration tests.
+    fragments:
+    - v0.0.8_summary.yml
+    release_date: '2022-01-04'
+  0.0.9:
+    modules:
+    - description: Synchronize Red Hat Quay teams with LDAP groups
+      name: quay_team_ldap
+      namespace: ''
+    release_date: '2022-01-18'
+  0.1.0:
+    changes:
+      minor_changes:
+      - In addition to token authentication, the modules can now connect to the Quay
+        API by using a login and password scheme. The new ``quay_username`` and ``quay_password``
+        parameters are mutually exclusive with the ``quay_token`` parameter.
+    fragments:
+    - v0.1.0_summary.yml
+    release_date: '2022-06-04'
+  0.1.1:
+    changes:
+      release_summary: Updating documentation and testing against version 3.7.2
+    fragments:
+    - v0.1.1_summary.yml
+    release_date: '2022-06-24'

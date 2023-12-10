@@ -1,0 +1,19 @@
+---
+- name: Creating a project in GitLab
+  hosts: workstation
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Ensure the project exists in GitLab
+      include_role:
+        name: gitlab_project_create
+      vars:
+        gitlab_project_create_api_server: git.lab.example.com
+        gitlab_project_create_api_scheme: https
+        gitlab_project_create_api_username: root
+        gitlab_project_create_api_password: RedHatGitlab
+        gitlab_project_create_user: student
+        gitlab_project_create_pass: Student@123
+        gitlab_project_create_project_name: my_webserver
+...

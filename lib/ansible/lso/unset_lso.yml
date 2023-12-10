@@ -1,0 +1,130 @@
+---
+# See https://docs.openshift.com/container-platform/4.10/storage/persistent_storage/persistent-storage-local.html#local-storage-uninstall_persistent-storage-local
+- name: Removing LSO
+  hosts: localhost
+  become: false
+  gather_facts: false
+  module_defaults:
+    group/redhat.openshift.openshift:
+      validate_certs: false
+    group/kubernetes.core.k8s:
+      validate_certs: false
+
+  vars:
+    project: openshift-local-storage
+    storageclass: local-blk
+    localvolume: local-storage
+
+  tasks:
+    - name: Ensure the localvolume object is removed
+      redhat.openshift.k8s:
+        state: absent
+        resource_definition:
+          apiVersion: local.storage.openshift.io/v1
+          kind: LocalVolume
+          metadata:
+            name: "{{ localvolume }}"
+            namespace: "{{ project }}"
+
+    - name: Ensure the Local Volume Discovery object is removed
+      redhat.openshift.k8s:
+        state: absent
+        resource_definition:
+          apiVersion: local.storage.openshift.io/v1alpha1
+          kind: LocalVolumeDiscovery
+          metadata:
+            name: auto-discover-devices
+            namespace: "{{ project }}"
+
+    - name: Ensure the Local Volume Discovery Result objects are removed
+      redhat.openshift.k8s:
+        state: absent
+        resource_definition:
+          apiVersion: local.storage.openshift.io/v1alpha1
+          kind: LocalVolumeDiscoveryResult
+          metadata:
+            name: "discovery-result-{{ item }}"
+            namespace: "{{ project }}"
+      loop:
+        - master01
+        - master02
+        - master03
+        - worker01
+        - worker02
+        - worker03
+        - worker04
+        - worker05
+        - worker06
+
+    - name: Pause for a minute for the operator to settle
+      ansible.builtin.pause:
+        minutes: 1
+
+    - name: Ensure the subscription is removed
+      redhat.openshift.k8s:
+        state: absent
+        resource_definition:
+          apiVersion: operators.coreos.com/v1alpha1
+          kind: Subscription
+          metadata:
+            name: local-storage-operator
+            namespace: "{{ project }}"
+
+    - name: Ensure the operator group is removed
+      redhat.openshift.k8s:
+        state: absent
+        resource_definition:
+          apiVersion: operators.coreos.com/v1
+          kind: OperatorGroup
+          metadata:
+            name: openshift-local-storage
+            namespace: "{{ project }}"
+
+    - name: Retrieve the PVs
+      kubernetes.core.k8s_info:
+        kind: PersistentVolume
+        label_selectors:
+          - "storage.openshift.com/owner-name = {{ localvolume }}"
+      register: pvs
+
+    - name: Ensure the PVs are removed
+      redhat.openshift.k8s:
+        state: absent
+        resource_definition:
+          apiVersion: v1
+          kind: PersistentVolume
+          metadata:
+            name: "{{ item['metadata']['name'] }}"
+      loop: "{{ pvs['resources'] }}"
+
+    - name: Ensure the storage class is removed
+      redhat.openshift.k8s:
+        state: absent
+        resource_definition:
+          apiVersion: storage.k8s.io/v1
+          kind: StorageClass
+          metadata:
+            name: "{{ storageclass }}"
+
+    - name: Ensure the localvolume object is ready to be removed
+      kubernetes.core.k8s_json_patch:
+        validate_certs: false
+        api_version: local.storage.openshift.io/v1
+        kind: LocalVolume
+        name: "{{ localvolume }}"
+        namespace: "{{ project }}"
+        patch:
+          - op: replace
+            path: /metadata/finalizers
+            value: null
+      ignore_errors: true
+
+    - name: Ensure the project does not exists
+      redhat.openshift.k8s:
+        state: absent
+        resource_definition:
+          apiVersion: project.openshift.io/v1
+          kind: Project
+          metadata:
+            name: "{{ project }}"
+...

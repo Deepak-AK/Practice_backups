@@ -1,0 +1,135 @@
+---
+- name: Ensure Git is installed
+  yum:
+    name: git
+    state: present
+
+- name: Ensure the python-gitlab pip package is installed
+  pip:
+    name: python-gitlab<=1.15.0
+    state: present
+
+- name: Ensure the private variables are set
+  set_fact:
+    __gitlab_project_create_url:
+      "{{ gitlab_project_create_api_scheme }}://{{ gitlab_project_create_api_server }}"
+
+- name: Ensure the course GitLab group exists
+  community.general.gitlab_group:
+    api_url: "{{ __gitlab_project_create_url }}"
+    api_username: "{{ gitlab_project_create_api_username }}"
+    api_password: "{{ gitlab_project_create_api_password }}"
+    validate_certs: false
+    name: "{{ gitlab_project_create_group | lower }}"
+    # project_creation_level and subgroup_creation_level are required:
+    # https://github.com/ansible-collections/community.general/issues/4577
+    project_creation_level: developer
+    subgroup_creation_level: owner
+    visibility: public
+    state: present
+
+- name: Ensure the user is a member of the GitLab group
+  community.general.gitlab_group_members:
+    api_url: "{{ __gitlab_project_create_url }}"
+    api_username: "{{ gitlab_project_create_api_username }}"
+    api_password: "{{ gitlab_project_create_api_password }}"
+    validate_certs: false
+    gitlab_user: "{{ gitlab_project_create_user }}"
+    gitlab_group: "{{ gitlab_project_create_group | lower }}"
+    access_level: owner
+    state: present
+  when: gitlab_project_create_user | length > 0
+
+- name: Ensure the system Git configuration is set
+  community.general.git_config:
+    name: "{{ item['name'] }}"
+    value: "{{ item['value'] }}"
+    scope: system
+  loop:
+    - name: user.name
+      value: "{{ gitlab_project_create_fake_username }}"
+    - name: user.email
+      value: "{{ gitlab_project_create_fake_email }}"
+    - name: credential.helper
+      value: store
+    - name: http.sslVerify
+      value: false
+    - name: init.defaultBranch
+      value: main
+
+- name: Ensure the Git credential file is deployed for the users
+  template:
+    src: templates/git-credentials
+    dest: "{{ item['home'] }}/.git-credentials"
+    owner: "{{ item['user'] }}"
+    group: "{{ item['user'] }}"
+    mode: 0600
+  loop: "{{ gitlab_project_create_system_users }}"
+
+- name: Ensure the project exists
+  when: gitlab_project_create_project_name | length > 0
+  block:
+    - name: Ensure the project is flushed
+      community.general.gitlab_project:
+        api_url: "{{ __gitlab_project_create_url }}"
+        api_username: "{{ gitlab_project_create_api_username }}"
+        api_password: "{{ gitlab_project_create_api_password }}"
+        validate_certs: false
+        name: "{{ gitlab_project_create_project_name }}"
+        group: "{{ gitlab_project_create_group | lower }}"
+        state: absent
+
+    - name: Ensure the temporary Git directory exists
+      tempfile:
+        state: directory
+      register: tempdir
+
+    - name: Ensure the initial content is copied
+      copy:
+        src: "{{ gitlab_project_create_content }}/"
+        dest: "{{ tempdir['path'] }}"
+        owner: root
+        group: root
+        mode: 0755
+
+    - name: Ensure the initial content is not already a Git repository
+      file:
+        path: "{{ tempdir['path'] }}/.git"
+        state: absent
+
+    # There is no Git module to perform that initialization. The
+    # ansible.builtin.git module can only clone a repository.
+    - name: Ensure the Git repository is initialized
+      shell:
+        cmd: >
+          git init &&
+          git add . &&
+          git commit -m 'Adding initial files' &&
+          git branch -m main
+        chdir: "{{ tempdir['path'] }}"
+        creates: "{{ tempdir['path'] }}/.git"
+
+    - name: Ensure the Git repository is pushed to GitLab
+      shell:
+        cmd: "git remote add origin
+        {{ __gitlab_project_create_url }}/{{ gitlab_project_create_group | lower }}/{{ gitlab_project_create_project_name }}.git
+        && git push --set-upstream origin main"
+        chdir: "{{ tempdir['path'] }}"
+        warn: false
+
+    - name: Ensure the temporary Git directory does not exist
+      file:
+        path: "{{ tempdir['path'] }}"
+        state: absent
+
+    - name: Ensure the project is public
+      community.general.gitlab_project:
+        api_url: "{{ __gitlab_project_create_url }}"
+        api_username: "{{ gitlab_project_create_api_username }}"
+        api_password: "{{ gitlab_project_create_api_password }}"
+        validate_certs: false
+        name: "{{ gitlab_project_create_project_name }}"
+        group: "{{ gitlab_project_create_group | lower }}"
+        visibility: public
+        state: present
+...

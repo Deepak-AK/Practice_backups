@@ -1,0 +1,4 @@
+---
+# defaults file for ocp-localvolumes
+additional_devices: 2
+max_device_count: 2

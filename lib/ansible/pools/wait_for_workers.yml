@@ -1,0 +1,16 @@
+---
+- name: Wait until worker nodes respond
+  hosts: localhost
+  tasks:
+    - name: Wait up to 10 minutes until worker nodes respond
+      wait_for:
+        host: "{{ item }}"
+        port: 22
+        state: started
+        timeout: 600
+      loop:
+        - worker04.ocp4.example.com
+        - worker05.ocp4.example.com
+        - worker06.ocp4.example.com
+      loop_control:
+        label: Waiting for node '{{ item }}' to respond.

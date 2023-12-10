@@ -1,0 +1,60 @@
+---
+- name: Check item templates
+  debug:
+    msg: "{{ lookup('template', '{{ item }}.j2') }}"
+    verbosity: 1
+  loop:
+  - local_volume_discovery
+  - local_volume
+
+# tasks file for ocp-localvolumes
+- name: Create local_volume_discovery
+  kubernetes.core.k8s:
+    state: present
+    definition: "{{ lookup('template', 'local_volume_discovery.j2') }}"
+  register: create_auto
+
+- name: Wait for local volume discovery results
+  kubernetes.core.k8s_info:
+    api_version: local.storage.openshift.io/v1alpha1
+    kind: LocalVolumeDiscoveryResult
+    name: discovery-result-{{ item }}
+    namespace: "{{ hostvars['localhost']['volume_namespace'] | default(local_volume['namespace']) }}"
+  register: local_volume_discovery
+  retries: 100
+  delay: 5
+  until:
+    - local_volume_discovery['resources'] | length > 0
+    - local_volume_discovery['resources'][0]['status']['discoveredDevices'] is defined
+    - local_volume_discovery['resources'][0]['status'] | json_query('discoveredDevices[?status.state==`Available`].path') | length == additional_devices | int
+  when: create_auto['changed']
+  loop: "{{ local_volume['nodes'] }}"
+  loop_control:
+    label: Waiting to discover local volumes on node {{ item }}.
+
+# DO370 has a similar section in the playbook but it is for LocalVolumeSet instead of LocalVolume
+
+# Check to see if a local volume resource already exists.
+# Because students can accidentally the resource using the
+# wrong name, use the name of the existing resource if it exists.
+- name: Identify if a local volume resource already exists
+  kubernetes.core.k8s_info:
+    api_version: local.storage.openshift.io/v1
+    kind: LocalVolume
+    namespace: "{{ local_volume['namespace'] }}"
+  register: local_volume_exists
+
+- name: Set facts for existing local volume
+  set_fact:
+    cacheable: True
+    local_volume_name: "{{ local_volume_exists['resources'][0]['metadata']['name'] }}"
+    local_volume_namespace: "{{ local_volume_exists['resources'][0]['metadata']['namespace'] }}"
+    storageclass_name: "{{ local_volume_exists['resources'][0]['spec']['storageClassDevices'][0]['storageClassName'] }}"
+  when:
+    - local_volume_exists['resources'] | length > 0
+    - local_volume_exists['resources'][0]['metadata']['name'] is defined
+
+- name: Create local volume
+  kubernetes.core.k8s:
+    state: present
+    definition: "{{ lookup('template', 'local_volume.j2') }}"

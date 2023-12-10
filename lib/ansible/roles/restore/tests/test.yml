@@ -1,0 +1,14 @@
+---
+- name: Restoring the network configuration files
+  hosts: nodes
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Ensure the files are restored
+      include_role:
+        name: gls.utils.restore
+      vars:
+        backup_id: netconf
+        restore_remove_after: false
+...

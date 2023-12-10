@@ -1,0 +1,24 @@
+---
+- name: Deploying Jenkins
+  hosts: localhost
+  become: false
+  gather_facts: false
+
+  tasks:
+    - name: Ensure the gitops-gitops project exists
+      redhat.openshift.k8s:
+        validate_certs: false
+        name: gitops-gitops
+        api_version: project.openshift.io/v1
+        kind: Project
+        state: present
+
+    - name: Ensure Jenkins is deployed
+      redhat.openshift.openshift_process:
+        validate_certs: false
+        name: jenkins-persistent
+        namespace: openshift
+        namespace_target: gitops-gitops
+        state: present
+        wait: true
+...

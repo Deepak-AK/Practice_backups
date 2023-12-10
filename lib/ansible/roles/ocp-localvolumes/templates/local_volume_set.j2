@@ -1,0 +1,24 @@
+apiVersion: local.storage.openshift.io/v1alpha1
+kind: LocalVolumeSet
+metadata:
+  name: {{ hostvars['utility']['volume_set_name'] | default(local_volume_set['name']) }}
+  namespace: {{ hostvars['utility']['volume_set_namespace'] | default(local_volume_set['namespace']) }}
+spec:
+  deviceInclusionSpec:
+    deviceTypes:
+{% for type in local_volume_set['device_types'] %}
+    - {{ type }}
+{% endfor %}
+    minSize: {{ local_volume_set['min_size'] }}
+  nodeSelector:
+    nodeSelectorTerms:
+    - matchExpressions:
+      - key: kubernetes.io/hostname
+        operator: In
+        values:
+{% for node in storage_nodes %}
+        - {{ node }}
+{% endfor %}
+  storageClassName: {{ hostvars['utility']['storage_class_name'] | default(local_volume_set['storage_class_name']) }}
+  maxDeviceCount: {{ max_device_count }}
+  volumeMode: {{ local_volume_set['volume_mode'] }}

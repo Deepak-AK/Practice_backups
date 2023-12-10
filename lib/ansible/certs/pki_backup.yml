@@ -1,0 +1,14 @@
+---
+- name: Backing up PKI configuration files
+  hosts: localhost
+  become: true
+  gather_facts: false
+
+  tasks:
+    - include_role:
+        name: backup
+      vars:
+        backup_id: ch06s02
+        backup_files:
+          - /etc/pki
+...

@@ -1,0 +1,33 @@
+---
+- name: Ensure the system Git configuration is absent
+  file:
+    path: /etc/gitconfig
+    state: absent
+
+- name: Ensure the Git credential file is absent for the users
+  file:
+    path: "{{ item['home'] }}/.git-credentials"
+    state: absent
+  loop: "{{ gitlab_project_destroy_system_users }}"
+
+- name: Ensure the private variables are set
+  set_fact:
+    __gitlab_project_destroy_url:
+      "{{ gitlab_project_destroy_api_scheme }}://{{ gitlab_project_destroy_api_server }}"
+
+- name: Ensure the python-gitlab pip package is installed
+  pip:
+    name: python-gitlab<=1.15.0
+    state: present
+
+- name: Ensure the project is absent
+  community.general.gitlab_project:
+    api_url: "{{ __gitlab_project_destroy_url }}"
+    api_username: "{{ gitlab_project_destroy_api_username }}"
+    api_password: "{{ gitlab_project_destroy_api_password }}"
+    validate_certs: false
+    name: "{{ gitlab_project_destroy_project_name }}"
+    group: "{{ gitlab_project_destroy_group | lower }}"
+    state: absent
+  when: gitlab_project_destroy_project_name | length > 0
+...

@@ -1,0 +1,9 @@
+---
+gitlab_project_destroy_api_server: git.ocp4.example.com
+gitlab_project_destroy_api_scheme: https
+gitlab_project_destroy_api_username: root
+gitlab_project_destroy_api_password: RedHatGitlab
+
+gitlab_project_destroy_group: training
+gitlab_project_destroy_project_name: ""
+...

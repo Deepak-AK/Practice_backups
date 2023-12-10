@@ -1,0 +1,14 @@
+---
+# Configure Git for these users. Do not remove the root user.
+# If you modify that list, update the equivalent list in the
+# gitlab_project_destroy role.
+gitlab_project_create_system_users:
+  - user: student
+    home: /home/student
+  - user: devops
+    home: /home/devops
+  - user: root
+    home: /root
+gitlab_project_create_fake_username: Daniel George
+gitlab_project_create_fake_email: daniel@lab.example.com
+...

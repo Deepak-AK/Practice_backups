@@ -1,0 +1,23 @@
+---
+- name: Deleting the project from GitLab
+  hosts: localhost
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Ensure the project is absent from GitLab
+      include_role:
+        name: gitlab_project_destroy
+      vars:
+        gitlab_project_destroy_project_name: "gitops-gitops"
+
+    - name: Ensure the cloned repository and exercise files are absent
+      file:
+        path: "{{ item }}"
+        state: absent
+      loop:
+        - /home/student/gitops-gitops
+        - /home/devops/gitops-gitops
+        - /root/gitops-gitops
+        - /tmp/gitops-gitops
+...

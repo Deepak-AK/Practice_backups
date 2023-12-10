@@ -1,0 +1,9 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: CatalogSource
+metadata:
+  name: {{ catalog_source['name'] | default("catalog")}}
+  namespace: {{ catalog_source['namespace'] | default("openshift-marketplace") }}
+spec:
+  displayName: {{ catalog_source['display_name'] | default("Operator Catalog") }}
+  image: {{ catalog_source['image'] }}
+  sourceType: {{ catalog_source['source_type'] | default("grpc") }}

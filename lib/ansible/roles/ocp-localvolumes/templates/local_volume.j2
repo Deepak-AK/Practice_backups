@@ -1,0 +1,16 @@
+apiVersion: local.storage.openshift.io/v1
+kind: LocalVolume
+metadata:
+  name: {{ hostvars['utility']['volume_name'] | default(local_volume['name']) }}
+  namespace: {{ hostvars['utility']['volume_set_namespace'] | default(local_volume['namespace']) }}
+spec:
+  logLevel: {{ local_volume['log_level'] | default("Normal") }}
+  managementState: {{ local_volume['management_state'] | default("Managed") }}
+  storageClassDevices:
+    - devicePaths:
+{% for device_path in local_volume['device_paths'] %}
+        - {{ device_path }}
+{% endfor %}
+      fsType: {{ local_volume['fs_type'] | default("ext4") }}
+      storageClassName: {{ hostvars['utility']['storage_class_name'] | default(local_volume['storage_class_name']) }}
+      volumeMode: {{ volume_mode | default(local_volume['volume_mode']) }}

@@ -1,0 +1,36 @@
+---
+- name: Removing iSCSI target
+  hosts: utility
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Ensure the target service is disabled
+      service:
+        name: target
+        state: stopped
+        enabled: false
+
+    - name: Ensure the target configuration is removed
+      file:
+        path: "{{ item }}"
+        state: absent
+      loop:
+        - /var/target
+        - /etc/target
+
+    - name: Ensure the logical volumes are zeroed
+      command:
+        cmd: "dd if=/dev/zero of={{ item }} bs=1M count=100"
+        removes: "{{ item }}"
+      loop:
+        - /dev/mapper/iSCSI_vg-pv_00
+        - /dev/mapper/iSCSI_vg-pv_01
+        - /dev/mapper/iSCSI_vg-pv_02
+        - /dev/mapper/iSCSI_vg-pv_03
+        - /dev/mapper/iSCSI_vg-pv_04
+        - /dev/mapper/iSCSI_vg-pv_05
+        - /dev/mapper/iSCSI_vg-pv_06
+        - /dev/mapper/iSCSI_vg-pv_07
+        - /dev/mapper/iSCSI_vg-pv_08
+...

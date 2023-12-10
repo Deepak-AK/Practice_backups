@@ -1,0 +1,116 @@
+#!/bin/bash
+#
+# Copyright 2020, 2022 Red Hat, Inc.
+#
+# NAME
+#     lab-operators-install - lab script for DO380-OCP4
+#
+# SYNOPSIS
+#     lab-operators-install {start|finish}
+#
+#        start  - prepare the system for starting the lab
+#        finish - perform post-lab finish
+#
+# DESCRIPTION
+#     This script, based on singular argument, either does start or finish for
+#     the Installing Operators GE
+#
+# CHANGELOG
+#   * Mon Aug 29 2022 Herve Quatremain <hquatrem@redhat.com>
+#   - Installing already completed files in ~/DO380/labs/operators-install/
+#   * Tue Jun 16 Iván Chavero <ichavero@redhat.com>
+#   - initial creation
+
+
+PATH=/usr/bin:/bin:/usr/sbin:/sbin:/root/bin:/usr/local/bin
+declare -a valid_commands=(start finish)
+
+# Change these variables to match your exercise
+this='operators-install'
+title='Guided Exercise: Installing Operators'
+playbook_dir="/usr/local/lib/ansible"
+
+# Do not change these variables
+target='workstation'
+run_as_root='true'
+
+
+function lab_start {
+
+  ocp4_print_prereq_header
+
+  ocp4_is_cluster_up
+  print_line
+  ocp4_fail_if_project_exists "openshift-file-integrity"
+  ocp4_grab_lab_files "no-solution"
+
+  pad2 "Group file-integrity-operator absent"
+  if oc get OperatorGroup "file-integrity-operator" -o name
+  then
+    print_FAIL
+  else
+    print_SUCCESS
+  fi
+
+  pad2 "Subscription file-integrity-operator-sub absent"
+  if oc get sub "file-integrity-operator-sub" -o name
+  then
+    print_FAIL
+  else
+    print_SUCCESS
+  fi
+
+  ocp4_print_setup_header
+
+  print_line
+  print_line " Preparing the student's cluster:"
+
+  ocp4_login_as_admin
+
+  ocp4_print_setup_footer
+}
+
+
+function lab_finish {
+
+  ocp4_print_cleanup_header
+
+  ocp4_login_as_admin
+
+  ocp4_delete_group "file-integrity-operator"
+
+
+  if oc get OperatorGroup "file-integrity-operator" -o name
+  then
+    pad2 "Remove file-integrity-operatorOperatorGroup"
+    if oc delete OperatorGroup "file-integrity-operator"; then
+      print_SUCCESS
+    else
+      print_FAIL
+    fi
+  fi
+
+  if oc get sub "file-integrity-operator-sub" -o name
+  then
+    pad2 "Remove file-integrity-operator-sub subscription"
+    if oc delete sub "file-integrity-operator-sub"; then
+      print_SUCCESS
+    else
+      print_FAIL
+    fi
+  fi
+
+  ocp4_delete_project "openshift-file-integrity"
+  ocp4_cleanup_lab_files
+
+  ocp4_print_cleanup_footer
+}
+
+
+############### Don't EVER change anything below this line ###############
+
+# Source library of functions
+source /usr/local/lib/${function_lib}
+source /usr/local/lib/${platform_lib}
+
+grading_main_program "$@"

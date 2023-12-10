@@ -1,0 +1,51 @@
+---
+- name: Removing role infra to the large worker nodes
+  hosts: localhost
+  become: false
+  gather_facts: false
+  vars:
+    nodes:
+      - worker04
+      - worker05
+      - worker06
+  module_defaults:
+    group/redhat.openshift.openshift:
+      validate_certs: false
+    group/kubernetes.core.k8s:
+      validate_certs: false
+
+  tasks:
+    - name: Ensure the nodes have the worker role
+      redhat.openshift.k8s:
+        state: patched
+        resource_definition:
+          apiVersion: v1
+          kind: Node
+          metadata:
+            labels:
+              node-role.kubernetes.io/worker: ""
+              node-role.kubernetes.io/infra: null
+              node-role.kubernetes.io: null
+            name: "{{ item }}"
+      loop: "{{ nodes }}"
+
+    # Skip removing the infra MCP because the MCO starts a lengthy
+    # reconciliation process when the infra role is removed, and only after
+    # that reconciliation completes you can remove the infra MCP.
+    # See https://github.com/openshift/machine-config-operator/blob/master/docs/custom-pools.md#removing-a-custom-pool
+    #
+    # - name: Ensure the MachineConfigPool object does not exist for infra nodes
+    #   redhat.openshift.k8s:
+    #     state: absent
+    #     resource_definition:
+    #       apiVersion: machineconfiguration.openshift.io/v1
+    #       kind: MachineConfigPool
+    #       metadata:
+    #         name: infra
+
+    - name: Ensure the nodes are schedulable
+      kubernetes.core.k8s_drain:
+        state: uncordon
+        name: "{{ item }}"
+      loop: "{{ nodes }}"
+...

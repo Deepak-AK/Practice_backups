@@ -1,0 +1,58 @@
+#!/bin/bash
+#
+# Copyright 2020, 2022 Red Hat, Inc.
+#
+# NAME
+#     lab-operators-cluster - lab script for the DO380 Managing Cluster
+#                             Operators exercise
+#
+# SYNOPSIS
+#     lab-operators-cluster {start|finish}
+#
+#        start  - prepare the system for starting the lab
+#        finish - perform post-lab finish
+#
+# DESCRIPTION
+#     This script, based on singular argument, either does start or finish for
+#     the Managing Cluster Operators exercise.
+#
+# CHANGELOG
+#   * Mon Sep 26 2022 Herve Quatremain <hquatrem@redhat.com>
+#   - Adding a resources.txt file so that students can copy/paste commands.
+#   * Tue May 19 Your Name <yname@redhat.com>
+#   - original code
+
+
+PATH=/usr/bin:/bin:/usr/sbin:/sbin:/root/bin:/usr/local/bin
+declare -a valid_commands=(start finish)
+
+# Change these variables to match your exercise
+this='operators-cluster'
+title='Guided Exercise: Managing Cluster Operators'
+
+# Do not change these variables
+target='workstation'
+run_as_root='true'
+
+
+function lab_start {
+  ocp4_print_prereq_header
+  ocp4_is_cluster_up
+  ocp4_grab_lab_files "no-solution"
+  ocp4_print_setup_footer
+}
+
+function lab_finish {
+  ocp4_print_cleanup_header
+  ocp4_cleanup_lab_files
+  ocp4_print_cleanup_footer
+}
+
+
+############### Don't EVER change anything below this line ###############
+
+# Source library of functions
+source /usr/local/lib/${function_lib}
+source /usr/local/lib/${platform_lib}
+
+grading_main_program "$@"

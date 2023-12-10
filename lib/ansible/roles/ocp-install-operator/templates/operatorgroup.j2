@@ -1,0 +1,14 @@
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: {{ operator['operator_group']['name'] }}
+  namespace: {{ operator['namespace']['name'] }}
+{% if operator['operator_group']['annotations'] is defined %}
+  annotations:
+{% for annotation in operator['operator_group']['annotations'] %}
+    {{ annotation }}
+{% endfor %}
+{% endif %}
+spec:
+  targetNamespaces:
+    - {{ operator['namespace']['name'] }}

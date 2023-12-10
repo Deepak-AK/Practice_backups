@@ -1,0 +1,88 @@
+---
+- name: Adding role infra to the large worker nodes
+  hosts: localhost
+  become: false
+  gather_facts: false
+  vars:
+    nodes:
+      - worker04
+      - worker05
+      - worker06
+  module_defaults:
+    group/redhat.openshift.openshift:
+      validate_certs: false
+    group/kubernetes.core.k8s:
+      validate_certs: false
+
+  tasks:
+    # Students do not run any workload on their cluster outside when doing
+    # GEs and Labs. To keep things simple, let's not drain the infra nodes
+    #
+    # - name: Ensure the nodes are unschedulable
+    #   kubernetes.core.k8s_drain:
+    #     state: cordon
+    #     name: "{{ item }}"
+    #   loop: "{{ nodes }}"
+
+    # - name: Ensure the nodes are drained
+    #   kubernetes.core.k8s_drain:
+    #     state: drain
+    #     name: "{{ item }}"
+    #     delete_options:
+    #       delete_emptydir_data: true
+    #       force: true
+    #       ignore_daemonsets: true
+    #       wait_timeout: 300
+    #   loop: "{{ nodes }}"
+
+    # See Infrastructure Nodes in OpenShift 4 at https://access.redhat.com/solutions/5034771
+    # See https://github.com/openshift/machine-config-operator/blob/master/docs/custom-pools.md
+    #
+    # The nodes should probably have a taint (similar to the master nodes) so
+    # that no workload is started on them. Because some other exercises might
+    # not use toleration but labels to target those nodes, let's not add that
+    # taint.
+    - name: Ensure the nodes have the infra role
+      redhat.openshift.k8s:
+        state: patched
+        resource_definition:
+          apiVersion: v1
+          kind: Node
+          metadata:
+            labels:
+              node-role.kubernetes.io/worker: null
+              node-role.kubernetes.io/infra: ""
+              node-role.kubernetes.io: infra
+            name: "{{ item }}"
+      loop: "{{ nodes }}"
+
+    # Keep things simple and fast. Let's not create an MCP
+    #
+    # # MCO will start a reconciliation process on the worker nodes. It takes 30
+    # # minutes to complete! However that should not prevent the GE to work.
+    # - name: Ensure the MachineConfigPool object exists for infra nodes
+    #   redhat.openshift.k8s:
+    #     state: present
+    #     resource_definition:
+    #       apiVersion: machineconfiguration.openshift.io/v1
+    #       kind: MachineConfigPool
+    #       metadata:
+    #         name: infra
+    #       spec:
+    #         machineConfigSelector:
+    #           matchExpressions:
+    #             - key: machineconfiguration.openshift.io/role
+    #               operator: In
+    #               values:
+    #                 - worker
+    #                 - infra
+    #         nodeSelector:
+    #           matchLabels:
+    #             node-role.kubernetes.io/infra: ""
+
+    # - name: Ensure the nodes are schedulable
+    #   kubernetes.core.k8s_drain:
+    #     state: uncordon
+    #     name: "{{ item }}"
+    #   loop: "{{ nodes }}"
+...

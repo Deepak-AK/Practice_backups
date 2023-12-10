@@ -1,0 +1,117 @@
+---
+- name: Deploying LSO
+  hosts: localhost
+  become: false
+  gather_facts: false
+  module_defaults:
+    group/redhat.openshift.openshift:
+      validate_certs: false
+    group/kubernetes.core.k8s:
+      validate_certs: false
+
+  vars:
+    project: openshift-local-storage
+    storageclass: local-blk
+    localvolume: local-storage
+
+  tasks:
+    - name: Ensure the namespace exists
+      redhat.openshift.k8s:
+        state: present
+        resource_definition:
+          apiVersion: v1
+          kind: Namespace
+          metadata:
+            name: "{{ project }}"
+
+    - name: Ensure the operator group exists
+      redhat.openshift.k8s:
+        state: present
+        resource_definition:
+          apiVersion: operators.coreos.com/v1
+          kind: OperatorGroup
+          metadata:
+            name: openshift-local-storage
+            namespace: "{{ project }}"
+          spec:
+            targetNamespaces:
+              - "{{ project }}"
+
+    - name: Ensure the subscription exists
+      redhat.openshift.k8s:
+        state: present
+        resource_definition:
+          apiVersion: operators.coreos.com/v1alpha1
+          kind: Subscription
+          metadata:
+            name: local-storage-operator
+            namespace: "{{ project }}"
+          spec:
+            channel: "4.10"
+            installPlanApproval: Automatic
+            name: local-storage-operator
+            source: do380-catalog
+            sourceNamespace: openshift-marketplace
+      register: create_subscription
+
+    - name: Ensure the operator has finished installing
+      when: create_subscription['changed']
+      block:
+        - name: Ensure the subscription is installed
+          kubernetes.core.k8s_info:
+            api_version: operators.coreos.com/v1alpha1
+            kind: Subscription
+            name: local-storage-operator
+            namespace: "{{ project }}"
+          register: subscription_ready
+          retries: 100
+          delay: 5
+          until:
+            - subscription_ready['resources'] | length > 0
+            - subscription_ready['resources'][0]['status']['installedCSV'] is defined
+            - subscription_ready['resources'][0]['status']['state'] is defined
+            - subscription_ready['resources'][0]['status']['state'] == "AtLatestKnown"
+
+        - name: Wait for CSV to succeed
+          kubernetes.core.k8s_info:
+            api_version: operators.coreos.com/v1alpha1
+            kind: ClusterServiceVersion
+            name: "{{ subscription_ready['resources'][0]['status']['installedCSV'] }}"
+            namespace: "{{ project }}"
+          register: csv_ready
+          retries: 100
+          delay: 5
+          until:
+            - csv_ready['resources'] | length > 0
+            - csv_ready['resources'][0]['status']['phase'] is defined
+            - csv_ready['resources'][0]['status']['phase'] == "Succeeded"
+
+    - name: Ensure the volumes are created
+      redhat.openshift.k8s:
+        state: present
+        resource_definition:
+          apiVersion: local.storage.openshift.io/v1
+          kind: LocalVolume
+          metadata:
+            name: "{{ localvolume }}"
+            namespace: "{{ project }}"
+          spec:
+            nodeSelector:
+              nodeSelectorTerms:
+                - matchExpressions:
+                    - key: kubernetes.io/hostname
+                      operator: In
+                      values:
+                        - worker04
+                        - worker05
+                        - worker06
+            storageClassDevices:
+              - storageClassName: "{{ storageclass }}"
+                volumeMode: Filesystem
+                devicePaths:
+                  - /dev/vdb
+
+    - name: Pause for a minute for the physical volumes to be created
+      ansible.builtin.pause:
+        minutes: 1
+...

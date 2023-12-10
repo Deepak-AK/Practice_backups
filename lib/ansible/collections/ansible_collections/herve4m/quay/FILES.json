@@ -1,0 +1,1636 @@
+{
+ "files": [
+  {
+   "name": ".",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": ".ansible-lint",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "858557e77a6037aadf27618584617e14ebf36d5390d84c77613dcb80f7c4d5be",
+   "format": 1
+  },
+  {
+   "name": ".flake8",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "3f16d61859b64bc5c09ff2c9fac89370e779196ff0497350f8a02e2b8c12edca",
+   "format": 1
+  },
+  {
+   "name": ".github",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": ".github/workflows",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": ".github/workflows/ansible-integration.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "13d6ed34a898f44813bf7d2e1bad6004d09598dee5c29b9e8250da029d1a0a70",
+   "format": 1
+  },
+  {
+   "name": ".github/workflows/ansible-sanity.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "5d1da0ca28e9163b7570ae05c42cbf9016a58b00f2420b19cef36a327033e9fd",
+   "format": 1
+  },
+  {
+   "name": ".github/workflows/pre-commit.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "e2227d7a5fce75bd8be0b7a7f184cc0c09c1a2cd8005f4354062b8e3486306ce",
+   "format": 1
+  },
+  {
+   "name": ".gitignore",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "330b76201af99f99ad8162846449d61bbb94146064a89f55d783862e05d81036",
+   "format": 1
+  },
+  {
+   "name": ".yamllint",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "49a229ed738d0c189273e170eb73ea86e5e4ac50f7735707bf0307267e518b94",
+   "format": 1
+  },
+  {
+   "name": "CONTRIBUTING.md",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "3d6d72e7b8fa3d5b0aaa98a8a525229d8d8420937236814f3533f3b923e748d8",
+   "format": 1
+  },
+  {
+   "name": "LICENSE",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+   "format": 1
+  },
+  {
+   "name": "changelogs",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "changelogs/fragments",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "changelogs/fragments/.keep",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "format": 1
+  },
+  {
+   "name": "changelogs/.plugin-cache.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "88cb02d498e3f9c7ccccbdf0b98033ca049a4a037228ed4954f7c54951196c5c",
+   "format": 1
+  },
+  {
+   "name": "changelogs/changelog.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "70590f7265c27e209b359a688b7a965fdfeb9db3ad474dacd55dfa7c8cc6132a",
+   "format": 1
+  },
+  {
+   "name": "changelogs/config.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "28f6e25940cfb181affd39b6472e2737ac2d2b4db75aed072931719ab0ae9b79",
+   "format": 1
+  },
+  {
+   "name": "docs",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "docs/quay_repository_mirror_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "3cf83b775911ea58afcba45bbc0d1ada5753043869094cd21f94a551aecb98d2",
+   "format": 1
+  },
+  {
+   "name": "docs/quay_repository_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "4e10daf71154ecf1813713bb52b763d582b06833dd3755a3c6797abab493296a",
+   "format": 1
+  },
+  {
+   "name": "docs/quay_robot_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "666bdde69b80a2de06334f0f5d6593615536db58ecc43430814b820fc7c713ec",
+   "format": 1
+  },
+  {
+   "name": "docs/quay_tag_info_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "3854e37d998ca228e2b4ed66058be390b88270620b5b7a39deb7a1968b297032",
+   "format": 1
+  },
+  {
+   "name": "docs/quay_tag_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "06e90d4653d2e6189aa19442925144d37323c65bd25263ffecd42cfb8c985a3c",
+   "format": 1
+  },
+  {
+   "name": "docs/quay_team_ldap_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "47f69297e32a4a595d95f9ea4b1b66152e441e36b6d1086dfc496c98913e18e4",
+   "format": 1
+  },
+  {
+   "name": "docs/quay_team_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "4489abe835d3a2ef92b2bb80216df09df04d572b88257ed928e3f5168cb4fa79",
+   "format": 1
+  },
+  {
+   "name": "docs/quay_user_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "56d77360c873e9384a8cdc611ed6499b80d26630c23fd25ff964747ccf42be55",
+   "format": 1
+  },
+  {
+   "name": "docs/quay_vulnerability_info_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "4c9d35ef7e3c6eb63b0668afcb8682e2b3a6a5085a29bb07b1a82d2308d2e1f1",
+   "format": 1
+  },
+  {
+   "name": "docs/index.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "f0f00a2391505fa95ab3e232842cfad2e8068462540fb2002ba7f4994523f34c",
+   "format": 1
+  },
+  {
+   "name": "docs/quay_api_token_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "83fc5da6f9c1ff5b605f0a2e4e0920e4aafde870a2333b9953d8839df5299dbf",
+   "format": 1
+  },
+  {
+   "name": "docs/quay_application_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "40180fab1f569d61043980115e749763424f5085f6d7e04ce9dc77f97efdf287",
+   "format": 1
+  },
+  {
+   "name": "docs/quay_default_perm_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "c067532abc75e31c228fa2202f00a45f82fac2af94ef96479817c892bdc09033",
+   "format": 1
+  },
+  {
+   "name": "docs/quay_docker_token_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "a9ae4cb11c6bcd16c6d8757852648b604f5d2c222ac24a9ce240bbc268d111b9",
+   "format": 1
+  },
+  {
+   "name": "docs/quay_first_user_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "b7988d4229ad6e25aeaa5ea824ffcdf2c227fe801c630cbb59d0538ba081acdb",
+   "format": 1
+  },
+  {
+   "name": "docs/quay_layer_info_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "43c15a9a1e3a5caeb5380bc0da6af95730395fb9220bce10b4eee38a824b47e8",
+   "format": 1
+  },
+  {
+   "name": "docs/quay_manifest_label_info_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "0885d8565246d09301c5895c33c494ce047e53f5c3c337ada4e9af8c4701129b",
+   "format": 1
+  },
+  {
+   "name": "docs/quay_manifest_label_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "5d08a58e0a50b0bd60b6461cf7b039ca495755d83bc317b2cbe4bee94967c8df",
+   "format": 1
+  },
+  {
+   "name": "docs/quay_message_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "ad7baf47febbdfb348bb07caef9cfe73c6f8f77130963f86fa9810547fafc421",
+   "format": 1
+  },
+  {
+   "name": "docs/quay_notification_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "0be7056ecf5d9f8593183d0f0abc46abe7f6f00edc464f6b4719ca689dd53db3",
+   "format": 1
+  },
+  {
+   "name": "docs/quay_org_role.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "41d6f3ea99f0a9e5d2afbe16a22352db5c4167568424191d4cd4420c3a24c678",
+   "format": 1
+  },
+  {
+   "name": "docs/quay_organization_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "2ed4ca299b73eccca122d2819d60831cb735c9938696b2e9c204d0cd2d874168",
+   "format": 1
+  },
+  {
+   "name": "docs/quay_quota_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "af97775a0d790875c7eec793d528c0f78b2a26b80606bccf0a331036afed455e",
+   "format": 1
+  },
+  {
+   "name": "meta",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "meta/runtime.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "437993465bd24cfd5ef1583b28317b99c69d832ea7a7d0941b0bb8fbe30ac11b",
+   "format": 1
+  },
+  {
+   "name": "plugins",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "plugins/doc_fragments",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "plugins/doc_fragments/auth.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "fd226b2f78a1e837cb26865cc044797a471f7c0244a87a62d6b6c5444ed0c33a",
+   "format": 1
+  },
+  {
+   "name": "plugins/module_utils",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "plugins/module_utils/quay_image.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "7bb46a3bfb79380fa304ef1264ad6a36816f3692986710bb74e8136ddf19c91d",
+   "format": 1
+  },
+  {
+   "name": "plugins/module_utils/api_module.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "34c1855d02582a1197a67b4492d9b621941a0b01ecc830a0d8b82ac74a9aaa7d",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/quay_api_token.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "d49985ee3880181e5b8b0d414a8dc08d194cad25c65303dd90e81f8e3c1a06c0",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/quay_application.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "d30cd658b3265cd0a9d99405f987c48232ea2db0e2b4841f792c6df7deaa8005",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/quay_default_perm.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "e0dabeec3a893c37b0cbee80445bc089639a32a111cf090dbde3e1069dbfb9e6",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/quay_docker_token.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "62fbab11090b163a5ddf6509189214bca3aa32b30774ed6a86c60cb5615a70cc",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/quay_first_user.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "c4c2ef3ad64ed4a97493c8f341dae848b88de4571eaafde34761910545727181",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/quay_layer_info.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "d4040c2e42de365efd0d23b3bc4315f1eaca884569575116905a70110b2b5727",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/quay_manifest_label.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "2ac450c7e6164acb675d6522ecca2558f5a7ebeb5722152475772ebf1920fdc9",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/quay_manifest_label_info.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "abba45f712fcec77b1b2a96df6a0f9bd034ddc01b25926461e2e04228d559867",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/quay_message.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "0641ca4330cc45d1c6824048968ebdd5632c65052733adb563f8fe90c70ba514",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/quay_notification.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "0e3490978a3aabf8e223a326956bba2ef3fd4b4265ed72bda771d9b86c33c9d5",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/quay_organization.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "f733c166890a29c944ca61954f6a240a03f34704dd6eccb589f18cb249ddec43",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/quay_quota.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "451ba984577d2c7b6ccf3c50e8d74af1d184f474c7c7ac44b34a10257ce34c28",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/quay_repository.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "8cb2f7037c7cf089efacbb81eb4710feb79b1fdf11159b3f25a492754c48925d",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/quay_repository_mirror.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "ac3e99a26ff4217990f4a42d4a8ac608f30c5c6b1c5b2384fb9be03dd3c6f757",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/quay_robot.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "5b8211c59870b367bc3f2bb65008ee037805808dcd521f239ac303baab4a8809",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/quay_tag.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "e1ec66f0be5061c7ed11a97bf1114d321bfef79a21aa2750367ea22ecae12f9a",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/quay_tag_info.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "64989cac3c7328668e490f5ad3b11400319f9932f07e96cee4df8360b9d89c6b",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/quay_team.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "23e33f578cfdd1b580f735379ccd079fd1618b2c6ec8ed2fae4d923f69ff308c",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/quay_team_ldap.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "d75dd74f9488bad54126efe4caebfb9f316c1b2e66b9f0e7f33e58a7f27fe48f",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/quay_user.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "0eb891c57f1a40f2db4a223330276ad459335f9b3f7baf2169faadd33c6c6bf6",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/quay_vulnerability_info.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "e5459a7621d1d5adb250046d92c3450c480a6b4e5759f59cd8ae00f37811e251",
+   "format": 1
+  },
+  {
+   "name": "roles",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "roles/quay_org",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "roles/quay_org/.travis.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "78d857103340db3d01f6ef7c14f6d269f6d34c48097adcea49736b17b80b1389",
+   "format": 1
+  },
+  {
+   "name": "roles/quay_org/defaults",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "roles/quay_org/defaults/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "b4104458eed858ae1fb4e0264fba03c34d483d1b69b65ebb297c2872592b1fd1",
+   "format": 1
+  },
+  {
+   "name": "roles/quay_org/meta",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "roles/quay_org/meta/argument_specs.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "bfc689ad20c0b18b132ac827b57bf593b21b0472cd783c398804fff6aa99b2f0",
+   "format": 1
+  },
+  {
+   "name": "roles/quay_org/meta/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "1170d9d0965a0380a624b939bb42c314a22bcd91abee50e2efd6951ad06cd7e3",
+   "format": 1
+  },
+  {
+   "name": "roles/quay_org/tasks",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "roles/quay_org/tasks/applications.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "f59617127e37fa0a48a8c9b9819ee0b173bd83c1e68c44797ccf280243ae03b7",
+   "format": 1
+  },
+  {
+   "name": "roles/quay_org/tasks/default_perms.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "dd834c4c71c17a08f66240cbf153ebffb9d56e95d54dc8248c17152e5f2dc7d0",
+   "format": 1
+  },
+  {
+   "name": "roles/quay_org/tasks/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "14d3155d300b0260b41ec618b9b3126fbbbd3b85c7af509423def11d8003ffa4",
+   "format": 1
+  },
+  {
+   "name": "roles/quay_org/tasks/organization.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "67cce404e3aa550094dd7b2684385054d70f2d1e1e9c2fe879f1d41438f7f02e",
+   "format": 1
+  },
+  {
+   "name": "roles/quay_org/tasks/quota.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "acda7fdb59883a84dd80bad2afda97b6b9dcbbf4a4bf5303b72d42ae84164dfc",
+   "format": 1
+  },
+  {
+   "name": "roles/quay_org/tasks/repositories.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "bfbc7302e7cd5370f337e0c994f985d34b1a6dde4fe4c2799fe8adb79ce9d693",
+   "format": 1
+  },
+  {
+   "name": "roles/quay_org/tasks/robots.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "a2f9e29e047c57fc399a3901f810a63271819952d1b8ab8827d15c8876b4f3b6",
+   "format": 1
+  },
+  {
+   "name": "roles/quay_org/tasks/teams.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "bdce36dd2bc312d37c77bf9a0577540308b68fc2d2182ec9bd296b0d7c442e9a",
+   "format": 1
+  },
+  {
+   "name": "roles/quay_org/tasks/users.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "815a7812eb4467f8035270fc08dc86d5fdf976883fd33a6a62a147259367e32a",
+   "format": 1
+  },
+  {
+   "name": "roles/quay_org/tests",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "roles/quay_org/tests/inventory",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "2de65b3599d7e8dcd28e14ad88131a6daae36b3942edfcc5a9cbb95c99320484",
+   "format": 1
+  },
+  {
+   "name": "roles/quay_org/tests/test.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "b03a037d73ac541e36afccb4247c9614a6f9571b9ec82913afe06d3e6a1dcf73",
+   "format": 1
+  },
+  {
+   "name": "roles/quay_org/README.md",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "7ea2139b23140018e3f296f34f2d69936c54d7ae319492afe17927ef623219cf",
+   "format": 1
+  },
+  {
+   "name": "tests",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/check_mode",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/check_mode/meta",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/check_mode/meta/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "9a22230a820b1c4feb2b3df826eb0e6b22ae756e720c3fadbe4b7a3d122ace0a",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/check_mode/tasks",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/check_mode/tasks/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "58cd71ba40d0456383b44007de7bc05fa7566dcbae82038056618a0b0e32716d",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_api_token",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_api_token/meta",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_api_token/meta/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "9a22230a820b1c4feb2b3df826eb0e6b22ae756e720c3fadbe4b7a3d122ace0a",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_api_token/tasks",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_api_token/tasks/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "ef60a319368cf28a7431c4bfce665469d4de14f0d6634e56f7cadd0e0bd78ba3",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_application",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_application/meta",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_application/meta/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "9a22230a820b1c4feb2b3df826eb0e6b22ae756e720c3fadbe4b7a3d122ace0a",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_application/tasks",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_application/tasks/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "e6ff6019c8275b2a16972b0f7283be0cd15f30d5e01f7c69cac6685d53c1d479",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_default_perm",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_default_perm/meta",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_default_perm/meta/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "9a22230a820b1c4feb2b3df826eb0e6b22ae756e720c3fadbe4b7a3d122ace0a",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_default_perm/tasks",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_default_perm/tasks/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "9a5892d46fe0d2d4b1e30197b05c6279fd47e2f50d76569b7a39d88a7250971a",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_docker_token",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_docker_token/meta",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_docker_token/meta/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "9a22230a820b1c4feb2b3df826eb0e6b22ae756e720c3fadbe4b7a3d122ace0a",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_docker_token/tasks",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_docker_token/tasks/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "fe4d418c775f9a4a828ce1bf3c33fb09dfda5f0d176446135f751f55e36e8b9b",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_layer_info",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_layer_info/meta",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_layer_info/meta/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "9a22230a820b1c4feb2b3df826eb0e6b22ae756e720c3fadbe4b7a3d122ace0a",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_layer_info/tasks",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_layer_info/tasks/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "53bfc02d2c18f8f1635d93b87ea9066a355113abf1ba828c8eea190c02f69c69",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_manifest_label",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_manifest_label/defaults",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_manifest_label/defaults/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "76fe818299d3f1d138aa58ecd98f17bc4f51b9abfdf432170ee830ffa7ad1905",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_manifest_label/meta",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_manifest_label/meta/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "9a22230a820b1c4feb2b3df826eb0e6b22ae756e720c3fadbe4b7a3d122ace0a",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_manifest_label/tasks",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_manifest_label/tasks/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "15e4399e17588b3a2ada380ae54d7614aab2e7968bbacfc7716d99d01d753f28",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_manifest_label_info",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_manifest_label_info/meta",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_manifest_label_info/meta/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "9a22230a820b1c4feb2b3df826eb0e6b22ae756e720c3fadbe4b7a3d122ace0a",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_manifest_label_info/tasks",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_manifest_label_info/tasks/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "6054b0f03cf19a307986f86a87cc89ddda67cbcc3e4f5fac48202fb89c2b9ac7",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_message",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_message/meta",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_message/meta/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "9a22230a820b1c4feb2b3df826eb0e6b22ae756e720c3fadbe4b7a3d122ace0a",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_message/tasks",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_message/tasks/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "7c5000b3e6af945714a262c4a3e92ba084b8df2db26faab30f88107a10a17940",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_notification",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_notification/meta",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_notification/meta/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "9a22230a820b1c4feb2b3df826eb0e6b22ae756e720c3fadbe4b7a3d122ace0a",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_notification/tasks",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_notification/tasks/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "7484f701a4aaf9942f96c777e20221257ff2b4b9366f445aec095f553e3f2fd9",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_organization",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_organization/meta",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_organization/meta/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "9a22230a820b1c4feb2b3df826eb0e6b22ae756e720c3fadbe4b7a3d122ace0a",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_organization/tasks",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_organization/tasks/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "20ca7dd32e79439311a733c8b67fb88cb9f6352756ae805579ffd369e43f764b",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_quota",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_quota/meta",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_quota/meta/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "9a22230a820b1c4feb2b3df826eb0e6b22ae756e720c3fadbe4b7a3d122ace0a",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_quota/tasks",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_quota/tasks/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "f49344c815b3422015bf889b7277760e8357f8985e95f565f77da652ca84ef26",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_repository",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_repository/meta",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_repository/meta/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "9a22230a820b1c4feb2b3df826eb0e6b22ae756e720c3fadbe4b7a3d122ace0a",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_repository/tasks",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_repository/tasks/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "d76d79da8f4dedb7b8ecf1f19113a56428365ca26f6624714b74efe089280211",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_repository_mirror",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_repository_mirror/meta",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_repository_mirror/meta/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "9a22230a820b1c4feb2b3df826eb0e6b22ae756e720c3fadbe4b7a3d122ace0a",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_repository_mirror/tasks",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_repository_mirror/tasks/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "b0495608c65449b4e6e8bb3640330fec63abc3ce6d961d5f0f8a8cc79511fb91",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_robot",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_robot/meta",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_robot/meta/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "9a22230a820b1c4feb2b3df826eb0e6b22ae756e720c3fadbe4b7a3d122ace0a",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_robot/tasks",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_robot/tasks/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "c226041d2d253342bbc580e8c91e22a4516ab514159d9230747f81611bef7cdc",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_tag",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_tag/defaults",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_tag/defaults/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "191a85420a7ba2786b61ca9ec9fcf3fdb07b630fcfabb3bcb18d09fcbcdc164b",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_tag/meta",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_tag/meta/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "9a22230a820b1c4feb2b3df826eb0e6b22ae756e720c3fadbe4b7a3d122ace0a",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_tag/tasks",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_tag/tasks/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "82f63bd75b1363edd73439298066d0b33e94a2a1bb180b97a5c042546ac8ae18",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_tag_info",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_tag_info/meta",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_tag_info/meta/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "9a22230a820b1c4feb2b3df826eb0e6b22ae756e720c3fadbe4b7a3d122ace0a",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_tag_info/tasks",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_tag_info/tasks/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "e99afc884bdae72d72486e6240f6d8ffdaa8337cfba079355a8fd2c6c08557a7",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_team",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_team/meta",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_team/meta/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "9a22230a820b1c4feb2b3df826eb0e6b22ae756e720c3fadbe4b7a3d122ace0a",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_team/tasks",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_team/tasks/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "4d658351543f0427c7a867df7f0070249276ce9b13a00f0c457e0eeabaa6f54d",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_team_ldap",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_team_ldap/aliases",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "2398735b9450fc094c06abf8243d11a91ba6aff6ce3d236b6db06bfb8e8fc457",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_team_ldap/meta",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_team_ldap/meta/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "9a22230a820b1c4feb2b3df826eb0e6b22ae756e720c3fadbe4b7a3d122ace0a",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_team_ldap/tasks",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_team_ldap/tasks/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "dc15226f5e73371b7afc2bba69e4038e636dacfb863acd10171bee126b9afd9f",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_user",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_user/meta",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_user/meta/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "9a22230a820b1c4feb2b3df826eb0e6b22ae756e720c3fadbe4b7a3d122ace0a",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_user/tasks",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_user/tasks/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "1c9cfa363d315efee2163a9787f17e3e4546f34164f538041bff3e45696a4fc6",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_vulnerability_info",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_vulnerability_info/meta",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_vulnerability_info/meta/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "9a22230a820b1c4feb2b3df826eb0e6b22ae756e720c3fadbe4b7a3d122ace0a",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_vulnerability_info/tasks",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/quay_vulnerability_info/tasks/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "c322ea19072d6a57833cb848f437d38bf40908d9ec97d55aee2d3f59847e076a",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/role_quay_org",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/role_quay_org/meta",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/role_quay_org/meta/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "9a22230a820b1c4feb2b3df826eb0e6b22ae756e720c3fadbe4b7a3d122ace0a",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/role_quay_org/tasks",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/role_quay_org/tasks/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "187c229dcb73179964d2a434e1869f2885b57289ca001e71d2d6370a52944e6e",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/setup_token",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/setup_token/defaults",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/setup_token/defaults/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "83918ceaeae2a89b14e697fde23f55a3ff7f5bd42021f036490f4b25c2fe7d13",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/setup_token/tasks",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/setup_token/tasks/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "d327eb0a8fb76650aa79553a585e8fe39212aa2088f7c0a8a22b66029b5e9602",
+   "format": 1
+  },
+  {
+   "name": "tests/postgresql-extension.sh",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "6774b26ba5cc73c24a0eb6a11dd9385973ba019c2f9393b2f45dc5db021e0d6d",
+   "format": 1
+  },
+  {
+   "name": "tests/quay-config",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/quay-config/config.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "2ad5165ab715657b238fd139ca52ae78b63529963d1283fa7283dbb52510cfac",
+   "format": 1
+  },
+  {
+   "name": "tests/quay-delay.sh",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "62459e62ae552b980d10bc4cb14696d36172d382db32dca8cc35e1f7f7cafe40",
+   "format": 1
+  },
+  {
+   "name": "tests/sample_manual_test.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "1f62e6487885224fa9a7adaf03ce2007bc91016f1a4638bd7e5b62c2b20b5a5e",
+   "format": 1
+  },
+  {
+   "name": "tests/sanity",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/sanity/ignore-2.10.txt",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "335a4323e879115abec204273065a9f0a29f70af0b742be0001f9ed6334695bf",
+   "format": 1
+  },
+  {
+   "name": "tests/sanity/ignore-2.11.txt",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "335a4323e879115abec204273065a9f0a29f70af0b742be0001f9ed6334695bf",
+   "format": 1
+  },
+  {
+   "name": "tests/sanity/ignore-2.12.txt",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "335a4323e879115abec204273065a9f0a29f70af0b742be0001f9ed6334695bf",
+   "format": 1
+  },
+  {
+   "name": "tests/sanity/ignore-2.13.txt",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "335a4323e879115abec204273065a9f0a29f70af0b742be0001f9ed6334695bf",
+   "format": 1
+  },
+  {
+   "name": "tests/sanity/ignore-2.9.txt",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "335a4323e879115abec204273065a9f0a29f70af0b742be0001f9ed6334695bf",
+   "format": 1
+  },
+  {
+   "name": "tests/README.md",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "7b5017df64d6e62f8ee93cf04e769ce907680079a34859ff4bf2741903eb5a3e",
+   "format": 1
+  },
+  {
+   "name": "tests/docker-compose.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "e59e16b123076802301279b4bb22c0a9d3e489fa785bd2d389cfa0f31d7619d4",
+   "format": 1
+  },
+  {
+   "name": ".pre-commit-config.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "ed1c8e21e6fb3b861ecdc27f91cd784b279009c02845166961f01f50f8c6790f",
+   "format": 1
+  },
+  {
+   "name": "CHANGELOG.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "51f1bc1f281fe7a63907f9e8992a2c4ad6061f89d3a19b692288512cc04c1228",
+   "format": 1
+  },
+  {
+   "name": "README.md",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "83fb69fee4f8c06a3e0f0b099124520eda3e779926b0a23864be3af95f2405b6",
+   "format": 1
+  }
+ ],
+ "format": 1
+}

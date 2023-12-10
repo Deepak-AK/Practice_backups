@@ -1,0 +1,22 @@
+# https://docs.openshift.com/container-platform/4.10/storage/persistent_storage/persistent-storage-local.html
+
+---
+- name: Delete the Local Storage Operator
+  hosts: localhost
+  become: yes
+  gather_facts: False
+
+  module_defaults:
+    group/k8s:
+      host: "{{ ocp_cluster['host'] }}"
+      validate_certs: "{{ ocp_cluster['validate_certs'] }}"
+
+  vars:
+    marketplace_namespace: openshift-marketplace
+    operator:
+      namespace: openshift-local-storage
+      package_manifest: local-storage-operator
+
+  roles:
+    - role: ocp-delete-lso
+      # operator: "{{ operators['lso'] }}"

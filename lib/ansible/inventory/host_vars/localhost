@@ -1,0 +1,54 @@
+---
+ocp_cluster:
+  host: "https://api.ocp4.example.com:6443"
+  validate_certs: False
+
+control_nodes:
+  - master01
+  - master02
+  - master03
+
+storage_nodes:
+  - worker04
+  - worker05
+  - worker06
+
+additional_devices: 1
+max_device_count: 1
+
+sku: "do380"
+ocp_version: "4.10"
+internal_registry: "registry.ocp4.example.com:8443"
+
+catalog_source:
+  name: "{{ sku }}-catalog"
+  namespace: "openshift-marketplace"
+  display_name: "{{ sku }} Operator Catalog"
+  image: "{{ internal_registry }}/redhat/redhat-operator-index:v{{ ocp_version }}"
+  source_type: "grpc"
+
+operators:
+  lso:
+    name: "local-storage-operator"
+    namespace:
+      name: "openshift-local-storage"
+    subscription:
+      labels:
+        - "operators.coreos.com/local-storage-operator.openshift-local-storage: ''"
+    operator_group:
+      name: "openshift-local-storage"
+      annotations:
+      - "olm.providedAPIs: LocalVolume.v1.local.storage.openshift.io,LocalVolumeDiscovery.v1alpha1.local.storage.openshift.io,LocalVolumeDiscoveryResult.v1alpha1.local.storage.openshift.io,LocalVolumeSet.v1alpha1.local.storage.openshift.io"
+    channel: "4.10"
+    source: "{{ sku }}-catalog"
+
+local_volume:
+  name: local-storage
+  namespace: "{{ operators['lso']['namespace']['name'] }}"
+  nodes: "{{ storage_nodes }}"
+  device_paths:
+  - /dev/vdb
+  fs_type: ext4
+  storage_class_name: local-blk
+  # volume_mode can be Block or Filesystem
+  volume_mode: Filesystem

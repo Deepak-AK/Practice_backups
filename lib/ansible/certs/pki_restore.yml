@@ -1,0 +1,43 @@
+---
+- name: Restoring PKI configuration files
+  hosts: localhost
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Ensure the custom PKI files are removed
+      file:
+        state: absent
+        path: "{{ item }}"
+      loop:
+        - /etc/pki/tls/certs/classroom-ca.csr
+        - /etc/pki/tls/certs/classroom-ca.pem
+        - /etc/pki/tls/private/classroom-ca-key.pem
+        - /etc/pki/ca-trust/source/anchors/classroom-ca.pem
+        - /tmp/certs
+        - /etc/pki/tls/certs/wildcard-api.pem
+        - /etc/pki/tls/certs/wildcard-api.csr
+        - /etc/pki/tls/private/wildcard-api-key.pem
+        - /etc/pki/tls/certs/combined-cert.pem
+        - /etc/pki/tls/certs/wildcard.pem
+        - /etc/pki/tls/certs/wildcard-combined.pem
+        - /etc/pki/tls/private/wildcard-key.pem
+        - /etc/pki/tls/certs/api.pem
+        - /etc/pki/tls/certs/api-combined.pem
+        - /etc/pki/tls/certs/custom.pem
+        - /etc/pki/tls/private/custom-key.pem
+        - /etc/pki/tls/certs/custom-combined.pem
+        - /etc/pki/tls/private/custom-combined-key.pem
+        - /etc/pki/tls/private/api-key.pem
+        - /etc/pki/tls/certs/review.pem
+        - /etc/pki/tls/private/review-key.pem
+        - /etc/pki/tls/certs/review-combined.pem
+        - /etc/pki/tls/private/review-combined-key.pem
+
+    - include_role:
+        name: restore
+      vars:
+        backup_id: ch06s02
+        backup_files:
+          - /etc/pki
+...

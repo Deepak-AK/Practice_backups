@@ -1,0 +1,98 @@
+---
+- name: Check item templates
+  debug:
+    msg: "{{ lookup('template', '{{ item }}.j2') }}"
+    verbosity: 1
+  loop:
+  - catalogsource
+  - namespace
+  - operatorgroup
+  - subscription
+
+# tasks file for ocp-install-operator
+- name: Create CatalogSource
+  kubernetes.core.k8s:
+    state: present
+    definition: "{{ lookup('template', 'catalogsource.j2') }}"
+  register: create_catalogsource
+
+- name: Create namespace "{{ operator['namespace']['name'] }}"
+  kubernetes.core.k8s:
+    state: present
+    definition: "{{ lookup('template', 'namespace.j2') }}"
+  register: create_namespace
+
+- name: Wait for namespace creation
+  kubernetes.core.k8s_info:
+    kind: Namespace
+    name: "{{ operator['namespace']['name'] }}"
+  register: namespace_active
+  retries: 100
+  delay: 5
+  until:
+    - namespace_active['resources'] | length > 0
+    - namespace_active['resources'][0]['status']['phase'] is defined
+    - namespace_active['resources'][0]['status']['phase'] | lower == "active"
+  when: create_namespace['changed']
+
+# Because the web console creates a unique name for the operator group,
+# check to see if an operator group already exists.
+- name: Identify if an operator group exists for "{{ operator['name'] }}"
+  kubernetes.core.k8s_info:
+    api_version: operators.coreos.com/v1alpha2
+    kind: OperatorGroup
+    namespace: "{{ operator['namespace']['name'] }}"
+  register: operator_exists
+
+- name: Create operator group "{{ operator_exists['resources'][0]['metadata']['name'] }}" for operator "{{ operator['name'] }}"
+  vars:
+    operator_group: "{{ operator_exists['resources'][0]['metadata']['name'] }}"
+  kubernetes.core.k8s:
+    state: present
+    definition: "{{ lookup('template', 'operatorgroup.j2') }}"
+  when:
+    - operator_exists['resources'] | length > 0
+    - operator_exists['resources'][0]['metadata']['name'] is defined
+
+- name: Create operator group "{{ operator_exists['resources'][0]['metadata']['name'] }}" for operator "{{ operator['name'] }}"
+  kubernetes.core.k8s:
+    state: present
+    definition: "{{ lookup('template', 'operatorgroup.j2') }}"
+  when: operator_exists['resources'] | length == 0
+
+- name: Create subscription for operator "{{ operator['name'] }}"
+  kubernetes.core.k8s:
+    state: present
+    definition: "{{ lookup('template', 'subscription.j2') }}"
+  register: create_subscription
+
+- name: Wait for creation of subscription "{{ operator['name'] }}"
+  kubernetes.core.k8s_info:
+    api_version: operators.coreos.com/v1alpha1
+    kind: Subscription
+    name: "{{ operator['name'] }}"
+    namespace: "{{ operator['namespace']['name'] }}"
+  register: subscription_ready
+  retries: 100
+  delay: 5
+  until:
+    - subscription_ready['resources'] | length > 0
+    - subscription_ready['resources'][0]['status']['installedCSV'] is defined
+    - subscription_ready['resources'][0]['status']['state'] is defined
+    - subscription_ready['resources'][0]['status']['state'] == "AtLatestKnown"
+  when: create_subscription['changed']
+
+- name: Wait for CSV to succeed
+  kubernetes.core.k8s_info:
+    api_version: operators.coreos.com/v1alpha1
+    kind: ClusterServiceVersion
+    name: "{{ subscription_ready['resources'][0]['status']['installedCSV'] }}"
+    namespace: "{{ operator['namespace']['name'] }}"
+  register: csv_ready
+  retries: 100
+  delay: 5
+  until:
+    - csv_ready['resources'] | length > 0
+    - csv_ready['resources'][0]['status']['phase'] is defined
+    - csv_ready['resources'][0]['status']['phase'] == "Succeeded"
+  when: create_subscription['changed']

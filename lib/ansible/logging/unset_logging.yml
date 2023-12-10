@@ -1,0 +1,126 @@
+---
+- name: Removing Red Hat OpenShift Logging
+  hosts: localhost
+  become: false
+  gather_facts: false
+  module_defaults:
+    group/redhat.openshift.openshift:
+      validate_certs: false
+    group/kubernetes.core.k8s:
+      validate_certs: false
+
+  tasks:
+    - name: Ensure the ClusterLogging object is removed
+      redhat.openshift.k8s:
+        state: absent
+        resource_definition:
+          apiVersion: logging.openshift.io/v1
+          kind: ClusterLogging
+          metadata:
+            name: instance
+            namespace: openshift-logging
+
+    - name: Pause for a minute for OpenShift Logging to settle
+      ansible.builtin.pause:
+        minutes: 1
+
+    - name: Ensure the event router is removed
+      redhat.openshift.k8s:
+        state: absent
+        resource_definition:
+          apiVersion: "{{ item['api'] }}"
+          kind: "{{ item['kind'] }}"
+          metadata:
+            name: "{{ item['name'] }}"
+            namespace: openshift-logging
+      loop:
+        - api: "apps/v1"
+          kind: Deployment
+          name: eventrouter
+        - api: v1
+          kind: ConfigMap
+          name: eventrouter
+        - api: "rbac.authorization.k8s.io/v1"
+          kind: ClusterRoleBinding
+          name: event-reader-binding
+        - api: "rbac.authorization.k8s.io/v1"
+          kind: ClusterRole
+          name: event-reader
+        - api: v1
+          kind: ServiceAccount
+          name: eventrouter
+        - api: "template.openshift.io/v1"
+          kind: Template
+          name: eventrouter-template
+
+    - name: Ensure the CustomResourceDefinition objects are removed
+      redhat.openshift.k8s:
+        state: absent
+        resource_definition:
+          apiVersion: apiextensions.k8s.io/v1
+          kind: CustomResourceDefinition
+          metadata:
+            name: "{{ item }}"
+            namespace: openshift-logging
+      loop:
+        - "clusterlogforwarders.logging.openshift.io"
+        - "clusterloggings.logging.openshift.io"
+        - "kibanas.logging.openshift.io"
+        - "elasticsearches.logging.openshift.io"
+
+    - name: Ensure the OpenShift Logging subscription is removed
+      redhat.openshift.k8s:
+        state: absent
+        resource_definition:
+          apiVersion: operators.coreos.com/v1alpha1
+          kind: Subscription
+          metadata:
+            name: cluster-logging
+            namespace: openshift-logging
+
+    - name: Ensure the operator group for OpenShift Logging is removed
+      redhat.openshift.k8s:
+        state: absent
+        resource_definition:
+          apiVersion: operators.coreos.com/v1
+          kind: OperatorGroup
+          metadata:
+            name: cluster-logging
+            namespace: openshift-logging
+
+    - name: Ensure the Elasticsearch subscription is removed
+      redhat.openshift.k8s:
+        state: absent
+        resource_definition:
+          apiVersion: operators.coreos.com/v1alpha1
+          kind: Subscription
+          metadata:
+            name: elasticsearch-operator
+            namespace: openshift-operators-redhat
+
+    - name: Ensure the operator group for Elasticsearch is removed
+      redhat.openshift.k8s:
+        state: absent
+        resource_definition:
+          apiVersion: operators.coreos.com/v1
+          kind: OperatorGroup
+          metadata:
+            name: openshift-operators-redhat
+            namespace: openshift-operators-redhat
+
+    - name: Pause for a minute for OpenShift Logging to settle
+      ansible.builtin.pause:
+        minutes: 1
+
+    - name: Ensure the projects do not exist
+      redhat.openshift.k8s:
+        state: absent
+        resource_definition:
+          apiVersion: project.openshift.io/v1
+          kind: Project
+          metadata:
+            name: "{{ item }}"
+      loop:
+        - openshift-logging
+        - openshift-operators-redhat
+...

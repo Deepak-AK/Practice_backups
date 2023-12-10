@@ -1,0 +1,12 @@
+---
+# Remove the Git configuration for these users.
+# If you modify that list, update the equivalent list in the
+# gitlab_project_create role.
+gitlab_project_destroy_system_users:
+  - user: student
+    home: /home/student
+  - user: devops
+    home: /home/devops
+  - user: root
+    home: /root
+...

@@ -1,0 +1,58 @@
+---
+- name: Removing MachineConfigPool
+  hosts: localhost
+  become: false
+  gather_facts: false
+
+  module_defaults:
+    group/redhat.openshift.openshift:
+      validate_certs: false
+    group/kubernetes.core.k8s:
+      validate_certs: false
+
+  tasks:
+    - name: Pause for a minute for the reconciliation to start
+      ansible.builtin.pause:
+        minutes: 1
+
+    - name: Ensure the workers have reconciled
+      redhat.openshift.k8s:
+        state: present
+        resource_definition:
+          apiVersion: machineconfiguration.openshift.io/v1
+          kind: MachineConfigPool
+          metadata:
+            name: worker
+        wait: true
+        wait_timeout: 300
+        wait_condition:
+          type: Updating
+          status: "False"
+      ignore_errors: true
+
+    - name: Ensure the MachineConfigPool object does not exist for infra nodes
+      redhat.openshift.k8s:
+        state: absent
+        resource_definition:
+          apiVersion: machineconfiguration.openshift.io/v1
+          kind: MachineConfigPool
+          metadata:
+            name: infra
+
+    - name: Retrieve the MachineConfig resources
+      kubernetes.core.k8s_info:
+        kind: MachineConfig
+        label_selectors:
+          - "machineconfiguration.openshift.io/role = infra"
+      register: mc
+
+    - name: Ensure the MachineConfig resources are removed
+      redhat.openshift.k8s:
+        state: absent
+        resource_definition:
+          apiVersion: machineconfiguration.openshift.io/v1
+          kind: MachineConfig
+          metadata:
+            name: "{{ item['metadata']['name'] }}"
+      loop: "{{ mc['resources'] }}"
+...

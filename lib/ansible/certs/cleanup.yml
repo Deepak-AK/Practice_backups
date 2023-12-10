@@ -1,0 +1,91 @@
+---
+- name: Cleaning up OpenShift custom CA
+  hosts: localhost
+  become: false
+  gather_facts: false
+
+  module_defaults:
+    group/k8s:
+      host: https://api.ocp4.example.com:6443
+      validate_certs: false
+
+  tasks:
+    - name: Ensure the API server CA configuration is restored
+      redhat.openshift.k8s:
+        state: present
+        resource_definition:
+          apiVersion: config.openshift.io/v1
+          kind: APIServer
+          metadata:
+            name: cluster
+          spec:
+            audit:
+              profile: Default
+            servingCerts:
+              namedCertificates:
+                - names:
+                    - api.ocp4.example.com
+                  servingCertificate:
+                    name: classroom-tls
+
+    - name: Ensure the proxy CA configuration is restored
+      redhat.openshift.k8s:
+        state: present
+        resource_definition:
+          apiVersion: config.openshift.io/v1
+          kind: Proxy
+          metadata:
+            name: cluster
+          spec:
+            trustedCA:
+              name: classroom-certs
+
+    - name: Ensure the ingress controller CA configuration is restored
+      redhat.openshift.k8s:
+        state: present
+        resource_definition:
+          apiVersion: operator.openshift.io/v1
+          kind: IngressController
+          metadata:
+            name: default
+            namespace: openshift-ingress-operator
+          spec:
+            defaultCertificate:
+              name: classroom-tls
+
+    - name: Ensure the exercise secrets are removed
+      redhat.openshift.k8s:
+        state: absent
+        api_version: v1
+        kind: Secret
+        name: "{{ item['name'] }}"
+        namespace: "{{ item['namespace'] }}"
+      loop:
+        - name: custom-tls
+          namespace: openshift-config
+        - name: custom-tls-bundle
+          namespace: openshift-ingress
+        - name: wildcard-tls
+          namespace: openshift-ingress
+        - name: api-tls
+          namespace: openshift-config
+        - name: review-tls
+          namespace: openshift-ingress
+        - name: review-tls
+          namespace: openshift-config
+
+    - name: Ensure the exercise configuration maps are removed
+      redhat.openshift.k8s:
+        state: absent
+        api_version: v1
+        kind: ConfigMap
+        name: "{{ item['name'] }}"
+        namespace: "{{ item['namespace'] }}"
+      loop:
+        - name: combined-certs
+          namespace: openshift-config
+        - name: wildcard-bundle
+          namespace: openshift-config
+        - name: review-bundle
+          namespace: openshift-config
+...
