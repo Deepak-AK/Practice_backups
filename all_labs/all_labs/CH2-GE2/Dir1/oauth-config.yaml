@@ -1,0 +1,16 @@
+apiVersion: config.openshift.io/v1
+kind: OAuth
+metadata:
+  creationTimestamp: "2022-09-22T12:14:31Z"
+  generation: 8
+  name: cluster
+  resourceVersion: "336712"
+  uid: 15fbb68a-a5fc-4c15-a349-f59664d88078
+spec:
+  identityProviders:
+  - htpasswd:
+      fileData:
+        name: htpasswd-secret
+    mappingMethod: claim
+    name: htpasswd_provider
+    type: HTPasswd

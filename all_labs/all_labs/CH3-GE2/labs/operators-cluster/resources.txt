@@ -1,0 +1,1 @@
+oc adm release extract --from=registry.ocp4.example.com:8443/openshift/release:4.10.20-x86_64 --to=release-image
